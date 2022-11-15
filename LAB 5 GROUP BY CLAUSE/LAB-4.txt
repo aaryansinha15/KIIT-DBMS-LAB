@@ -1,0 +1,359 @@
+QUESTION1:
+
+
+SQL> CREATE TABLE EMP_2(Emp_ID NUMBER(4) PRIMARY KEY, Emp_Name VARCHAR2(15) UNIQUE, JOB VARCHAR2(10), Manager NUMBER(4) DEFAULT NULL, Hire_Date DATE, Salary NUMBER(5), Commission NUMBER(4) DEFAULT NULL, Dept_ID NUMBER(2));
+
+Table created.
+
+SQL>  INSERT INTO EMP_2(Emp_ID,Emp_Name,JOB,Manager,Hire_Date,Salary,Dept_ID)VALUES(7369,'SMITH','CLERK',7902,'17-DEC-80',800,20);
+
+1 row created.
+
+SQL> INSERT INTO EMP_2(Emp_ID,Emp_Name,JOB,Manager,Hire_Date,Salary,Commission,Dept_ID)VALUES(7499,'ALLEN','SALESMAN',7698,'20-FEB-81',1600,300,30);
+
+1 row created.
+
+SQL>  INSERT INTO EMP_2(Emp_ID,Emp_Name,JOB,Manager,Hire_Date,Salary,Commission,Dept_ID)VALUES(7521,'WARD','SALESMAN',7698,'22-FEB-81',1250,300,30);
+
+1 row created.
+
+SQL> INSERT INTO EMP_2(Emp_ID,Emp_Name,JOB,Manager,Hire_Date,Salary,Dept_ID)VALUES(7566,'JONES','MANAGER',7839,'2-APR-81',2975,30);
+
+1 row created.
+
+SQL> INSERT INTO EMP_2(Emp_ID,Emp_Name,JOB,Manager,Hire_Date,Salary,Commission,Dept_ID)VALUES(7654,'MARTIN','SALESMAN',7698,'28-SEP-81',1250,1400,30);
+
+1 row created.
+
+SQL>  INSERT INTO EMP_2(Emp_ID,Emp_Name,JOB,Manager,Hire_Date,Salary,Dept_ID)VALUES(7698,'BLAKE','MANAGER',7839,'1-MAY-81',2850,30);
+
+1 row created.
+
+SQL> INSERT INTO EMP_2(Emp_ID,Emp_Name,JOB,Manager,Hire_Date,Salary,Dept_ID)VALUES(7788,'CLARK','MANAGER',7839,'9-JUN-81',2450,10);
+
+1 row created.
+
+SQL> INSERT INTO EMP_2(Emp_ID,Emp_Name,JOB,Manager,Hire_Date,Salary,Dept_ID)VALUES(7782,'SCOTT','ANALYST',7566,'9-NOV-81',5000,10);
+
+1 row created.
+
+SQL> INSERT INTO EMP_2(Emp_ID,Emp_Name,JOB,Hire_Date,Salary,Dept_ID)VALUES(7839,'KING','PRESIDENT','17-NOV-81',5000,10);
+
+1 row created.
+
+SQL> INSERT INTO EMP_2(Emp_ID,Emp_Name,JOB,Manager,Hire_Date,Salary,commission,Dept_ID)VALUES(7844,'TURNER','SALESMAN',7698,'8-SEP-81',1500,0,30);
+
+1 row created.
+
+SQL> INSERT INTO EMP(Emp_ID,Emp_Name,Designation,Manager_ID,Hire_Date,Salary,Dept_ID)VALUES(7876,'ADAMS','CLERK',7788,'23-SEP-81',1100,20);
+
+1 row created.
+
+SQL> INSERT INTO EMP_2(Emp_ID,Emp_Name,JOB,Manager,Hire_Date,Salary,Dept_ID)VALUES(7876,'ADAMS','CLERK',7788,'23-SEP-81',1100,20);
+
+1 row created.
+
+SQL> INSERT INTO EMP(Emp_ID,Emp_Name,Designation,Manager_ID,Hire_Date,Salary,Dept_ID)VALUES(7900,'JAMES','CLERK',7698,'3-DEC-81',950,30);
+
+1 row created.
+
+SQL> INSERT INTO EMP_2(Emp_ID,Emp_Name,JOB,Manager,Hire_Date,Salary,Dept_ID)VALUES(7900,'JAMES','CLERK',7698,'3-DEC-81',950,30);
+
+1 row created.
+
+SQL> INSERT INTO EMP_2(Emp_ID,Emp_Name,JOB,Manager,Hire_Date,Salary,Dept_ID)VALUES(7902,'FORD','ANALYST',7566,'3-DEC-81',3000,20);
+
+1 row created.
+
+SQL> INSERT INTO EMP_2(Emp_ID,Emp_Name,JOB,Manager,Hire_Date,Salary,Dept_ID)VALUES(7934,'MILLER','CLERK',7782,'23-JAN-81',1300,10);
+
+1 row created.
+
+SQL> set pagesize 200;
+SQL> select * from EMP_2;
+
+    EMP_ID EMP_NAME        JOB           MANAGER HIRE_DATE     SALARY COMMISSION    DEPT_ID                                                                                                                                                                                                                                                                                                                                                                                                                         
+---------- --------------- ---------- ---------- --------- ---------- ---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                         
+      7369 SMITH           CLERK            7902 17-DEC-80        800                    20                                                                                                                                                                                                                                                                                                                                                                                                                         
+      7499 ALLEN           SALESMAN         7698 20-FEB-81       1600        300         30                                                                                                                                                                                                                                                                                                                                                                                                                         
+      7521 WARD            SALESMAN         7698 22-FEB-81       1250        300         30                                                                                                                                                                                                                                                                                                                                                                                                                         
+      7566 JONES           MANAGER          7839 02-APR-81       2975                    30                                                                                                                                                                                                                                                                                                                                                                                                                         
+      7654 MARTIN          SALESMAN         7698 28-SEP-81       1250       1400         30                                                                                                                                                                                                                                                                                                                                                                                                                         
+      7698 BLAKE           MANAGER          7839 01-MAY-81       2850                    30                                                                                                                                                                                                                                                                                                                                                                                                                         
+      7788 CLARK           MANAGER          7839 09-JUN-81       2450                    10                                                                                                                                                                                                                                                                                                                                                                                                                         
+      7782 SCOTT           ANALYST          7566 09-NOV-81       5000                    10                                                                                                                                                                                                                                                                                                                                                                                                                         
+      7839 KING            PRESIDENT             17-NOV-81       5000                    10                                                                                                                                                                                                                                                                                                                                                                                                                         
+      7844 TURNER          SALESMAN         7698 08-SEP-81       1500          0         30                                                                                                                                                                                                                                                                                                                                                                                                                         
+      7876 ADAMS           CLERK            7788 23-SEP-81       1100                    20                                                                                                                                                                                                                                                                                                                                                                                                                         
+      7900 JAMES           CLERK            7698 03-DEC-81        950                    30                                                                                                                                                                                                                                                                                                                                                                                                                         
+      7902 FORD            ANALYST          7566 03-DEC-81       3000                    20                                                                                                                                                                                                                                                                                                                                                                                                                         
+      7934 MILLER          CLERK            7782 23-JAN-81       1300                    10                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+14 rows selected.
+
+SQL> select EMP_ID,EMP_NAME,SALARY from EMP_2 where JOB='SALESMAN';
+
+    EMP_ID EMP_NAME            SALARY                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+---------- --------------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+      7499 ALLEN                 1600                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+      7521 WARD                  1250                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+      7654 MARTIN                1250                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+      7844 TURNER                1500                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+
+SQL> select * from EMP_2 where SALARY=(select min(SALARY) from EMP_2);
+
+    EMP_ID EMP_NAME        JOB           MANAGER HIRE_DATE     SALARY COMMISSION    DEPT_ID                                                                                                                                                                                                                                                                                                                                                                                                                         
+---------- --------------- ---------- ---------- --------- ---------- ---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                         
+      7369 SMITH           CLERK            7902 17-DEC-80        800                    20                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+
+SQL>  select * from EMP_2 where COMMISSION=(select max(COMMISSION) from EMP_2) and MANAGER='7698';
+
+    EMP_ID EMP_NAME        JOB           MANAGER HIRE_DATE     SALARY COMMISSION    DEPT_ID                                                                                                                                                                                                                                                                                                                                                                                                                         
+---------- --------------- ---------- ---------- --------- ---------- ---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                         
+      7654 MARTIN          SALESMAN         7698 28-SEP-81       1250       1400         30                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+
+SQL> select sum(SALARY) from EMP_2 where MANAGER='7839';
+
+SUM(SALARY)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+-----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+       8275                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+SQL> select DEPT_ID, avg(SALARY) from EMP_2 group by DEPT_ID;
+
+   DEPT_ID AVG(SALARY)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+---------- -----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+        30  1767.85714                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+        20  1633.33333                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+        10      3437.5    
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+
+SQL> select DEPT_ID, avg(SALARY) from EMP_2 group by DEPT_ID having AVG(SALARY)>2000;
+
+   DEPT_ID AVG(SALARY)                                                                                                                                                                                  
+---------- -----------                                                                                                                                                                                  
+        10      3437.5                      
+
+SQL> select DEPT_ID, avg(SALARY) from EMP_2 where SALARY>2000 group by DEPT_ID;
+
+   DEPT_ID AVG(SALARY)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+---------- -----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+        30      2912.5                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+        20        3000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+        10        4150                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+SQL> select DEPT_ID,avg(SALARY) from EMP_2 where SALARY>2000 group by DEPT_ID having AVG(SALARY)<3000;
+
+   DEPT_ID AVG(SALARY)                                                                                                                                                                                  
+---------- -----------                                                                                                                                                                                  
+        30      2912.5        
+    
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+QUESTION2:
+
+
+SQL> create table STUDENTT(YEAR number(4), ROLL number(2), SECTION char(2) check (SECTION in('IT','CS')), GROUPP varchar(10) check (GROUPP in ('Group-4','Group-6','Group-7')), CONTRIBUTION number(6));
+
+Table created.
+
+SQL>  insert into STUDENTT(YEAR,ROLL,SECTION,GROUPP,CONTRIBUTION)values(2020,26,'CS','Group-6',399);
+
+1 row created.
+
+SQL> insert into STUDENTT(YEAR,ROLL,SECTION,GROUPP,CONTRIBUTION)values(2019,29,'CS','Group-4',699);
+
+1 row created.
+
+SQL> insert into STUDENTT(YEAR,ROLL,SECTION,GROUPP,CONTRIBUTION)values(2019,34,'IT','Group-7',299);
+
+1 row created.
+
+SQL> insert into STUDENTT(YEAR,ROLL,SECTION,GROUPP,CONTRIBUTION)values(2020,35,'IT','Group-7',746);
+
+1 row created.
+
+SQL> insert into STUDENTT(YEAR,ROLL,SECTION,GROUPP,CONTRIBUTION)values(2020,22,'IT','Group-6',234);
+
+1 row created.
+
+SQL> insert into STUDENTT(YEAR,ROLL,SECTION,GROUPP,CONTRIBUTION)values(2021,20,'CS','Group-4',765);
+
+1 row created.
+
+SQL> insert into STUDENTT(YEAR,ROLL,SECTION,GROUPP,CONTRIBUTION)values(2021,13,'CS','Group-7',23456);
+
+1 row created.
+
+SQL> insert into STUDENTT(YEAR,ROLL,SECTION,GROUPP,CONTRIBUTION)values(2021,15,'CS','Group-4',987);
+
+1 row created.
+
+SQL> insert into STUDENTT(YEAR,ROLL,SECTION,GROUPP,CONTRIBUTION)values(2021,12,'IT','Group-6',0987);
+
+1 row created.
+
+SQL> insert into STUDENTT(YEAR,ROLL,SECTION,GROUPP,CONTRIBUTION)values(2023,11,'IT','Group-7',6789);
+
+1 row created.
+
+SQL> select * from STUDENTT;
+
+      YEAR       ROLL SE GROUPP     CONTRIBUTION                                
+---------- ---------- -- ---------- ------------                                
+      2020         26 CS Group-6             399                                
+      2019         29 CS Group-4             699                                
+      2019         34 IT Group-7             299                                
+      2020         35 IT Group-7             746                                
+      2020         22 IT Group-6             234                                
+      2021         20 CS Group-4             765                                
+      2021         13 CS Group-7           23456                                
+      2021         15 CS Group-4             987                                
+      2021         12 IT Group-6             987                                
+      2023         11 IT Group-7            6789                                
+
+10 rows selected.
+
+SQL> select YEAR from STUDENTT;
+
+      YEAR                                                                      
+----------                                                                      
+      2020                                                                      
+      2019                                                                      
+      2019                                                                      
+      2020                                                                      
+      2020                                                                      
+      2021                                                                      
+      2021                                                                      
+      2021                                                                      
+      2021                                                                      
+      2023                                                                      
+
+10 rows selected.
+
+SQL> select ROLL from STUDENTT;
+
+      ROLL                                                                      
+----------                                                                      
+        26                                                                      
+        29                                                                      
+        34                                                                      
+        35                                                                      
+        22                                                                      
+        20                                                                      
+        13                                                                      
+        15                                                                      
+        12                                                                      
+        11                                                                      
+
+10 rows selected.
+
+SQL> select CONTRIBUTION from STUDENTT;
+
+CONTRIBUTION                                                                    
+------------                                                                    
+         399                                                                    
+         699                                                                    
+         299                                                                    
+         746                                                                    
+         234                                                                    
+         765                                                                    
+       23456                                                                    
+         987                                                                    
+         987                                                                    
+        6789                                                                    
+
+10 rows selected.
+
+SQL> select COUNT(*) from STUDENTT;
+
+  COUNT(*)                                                                      
+----------                                                                      
+        10                                                                      
+
+SQL> select sum(CONTRIBUTION) from STUDENTT where GROUPP='Group-6';
+
+SUM(CONTRIBUTION)                                                               
+-----------------                                                               
+             1620                                                               
+
+SQL> select avg(CONTRIBUTION) from STUDENTT where GROUPP='Group-7';
+
+AVG(CONTRIBUTION)                                                               
+-----------------                                                               
+           7822.5                                                               
+
+SQL> select max(CONTRIBUTION) from STUDENTT where GROUPP='Group-4';
+
+MAX(CONTRIBUTION)                                                               
+-----------------                                                               
+              987                                                               
+
+SQL> select min(CONTRIBUTION) from STUDENTT where SECTION='CS';
+
+MIN(CONTRIBUTION)                                                               
+-----------------                                                               
+              399                                                               
+
+SQL> select ROLL from STUDENTT where CONTRIBUTION=(select max(CONTRIBUTION) from STUDENTT);
+
+      ROLL                                                                      
+----------                                                                      
+        13                                                                      
+
+
+SQL>  select ROLL,YEAR from STUDENTT where CONTRIBUTION=(select min(CONTRIBUTION) from STUDENTT);
+
+      ROLL       YEAR                                                           
+---------- ----------                                                           
+        22       2020                                                           
+
+SQL> select count(*) from STUDENTT where GROUPP='Group-7';
+
+  COUNT(*)                                                                      
+----------                                                                      
+         4                                                                      
+
+SQL> select GROUPP, count(*) from STUDENTT group by GROUPP;
+
+GROUPP       COUNT(*)                                                           
+---------- ----------                                                           
+Group-6             3                                                           
+Group-7             4                                                           
+Group-4             3                                                           
+
+SQL> select GROUPP, avg(CONTRIBUTION) from STUDENTT where CONTRIBUTION>90 group by GROUPP;
+
+GROUPP     AVG(CONTRIBUTION)                                                    
+---------- -----------------                                                    
+Group-6                  540                                                    
+Group-7               7822.5                                                    
+Group-4                  817                                                    
+
+SQL> select SECTION, count(*) , sum(CONTRIBUTION) from STUDENTT group by SECTION;
+
+SE   COUNT(*) SUM(CONTRIBUTION)                                                 
+-- ---------- -----------------                                                 
+IT          5              9055                                                 
+CS          5             26306                                                 
+
+SQL>  select SECTION, count(*) , sum(CONTRIBUTION) from STUDENTT where YEAR=2019 group by SECTION;
+
+SE   COUNT(*) SUM(CONTRIBUTION)                                                 
+-- ---------- -----------------                                                 
+IT          1               299                                                 
+CS          1               699                                                 
+
+SQL> select YEAR, max(CONTRIBUTION) from STUDENTT group by YEAR;
+
+      YEAR MAX(CONTRIBUTION)                                                    
+---------- -----------------                                                    
+      2023              6789                                                    
+      2019               699                                                    
+      2021             23456                                                    
+      2020               746                                                    
+
+SQL> spool off
+
+

@@ -1,0 +1,207 @@
+SQL> create table STUDENT_2(STUDENT_NAME VARCHAR2(11) NOT NULL,ROLL VARCHAR2(4) UNIQUE,DEPT VARCHAR2(4),AGE NUMBER(2) CHECK(AGE>=18 AND AGE<=28),GENDER VARCHAR2(6) CHECK(GENDER IN('Male','Female')),SEM NUMBER(2),CGPA NUMBER(5,2) NOT NULL);
+
+Table created.
+
+SQL> desc STUDENT_2;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ STUDENT_NAME                              NOT NULL VARCHAR2(11)
+ ROLL                                               VARCHAR2(4)
+ DEPT                                               VARCHAR2(4)
+ AGE                                                NUMBER(2)
+ GENDER                                             VARCHAR2(6)
+ SEM                                                NUMBER(2)
+ CGPA                                      NOT NULL NUMBER(5,2)
+
+SQL> INSERT INTO STUDENT_2(STUDENT_NAME,ROLL,DEPT,AGE,GENDER,SEM,CGPA)VALUES('SHIV','I01','IT',28,'Male',7,8.5);
+
+1 row created.
+
+SQL> select * from STUDENT_2;
+
+STUDENT_NAM ROLL DEPT        AGE GENDER        SEM       CGPA                   
+----------- ---- ---- ---------- ------ ---------- ----------                   
+SHIV        I01  IT           28 Male            7        8.5                   
+
+SQL> INSERT INTO STUDENT_2(STUDENT_NAME,ROLL,DEPT,AGE,GENDER,SEM,CGPA)VALUES('Kaushal','I02','IT',27,'Male',7,9.5);
+
+1 row created.
+
+SQL> INSERT INTO STUDENT_2(STUDENT_NAME,ROLL,DEPT,AGE,GENDER,SEM,CGPA)VALUES('Pragyan','I03','IT',25,'Female',7,7.5);
+
+1 row created.
+
+SQL> INSERT INTO STUDENT_2(STUDENT_NAME,ROLL,DEPT,AGE,GENDER,SEM,CGPA)VALUES('Seenu','C01','CSE',25,'Female',8,9.5);
+
+1 row created.
+
+SQL> INSERT INTO STUDENT_2(STUDENT_NAME,ROLL,DEPT,AGE,GENDER,SEM,CGPA)VALUES('Kunal','C02','CSE',28,'Male',8,9.35);
+
+1 row created.
+
+SQL> INSERT INTO STUDENT_2(STUDENT_NAME,ROLL,DEPT,AGE,GENDER,SEM,CGPA)VALUES('Lokesh','C03','CSE',24,'Male',8,8);
+
+1 row created.
+
+SQL> select * from STUDENT_2;
+
+STUDENT_NAM ROLL DEPT        AGE GENDER        SEM       CGPA                   
+----------- ---- ---- ---------- ------ ---------- ----------                   
+SHIV        I01  IT           28 Male            7        8.5                   
+Kaushal     I02  IT           27 Male            7        9.5                   
+Pragyan     I03  IT           25 Female          7        7.5                   
+Seenu       C01  CSE          25 Female          8        9.5                   
+Kunal       C02  CSE          28 Male            8       9.35                   
+Lokesh      C03  CSE          24 Male            8          8                   
+
+6 rows selected.
+
+SQL> INSERT INTO STUDENT_2(STUDENT_NAME,ROLL,DEPT,AGE,GENDER,SEM,CGPA)VALUES('Amit','E01','ETC',27,'Male',6,9.2);
+
+1 row created.
+
+SQL> INSERT INTO STUDENT_2(STUDENT_NAME,ROLL,DEPT,AGE,GENDER,SEM,CGPA)VALUES('Amrita','E02','ETC',22,'Female',6,7.45);
+
+1 row created.
+
+SQL> INSERT INTO STUDENT_2(STUDENT_NAME,ROLL,DEPT,AGE,GENDER,SEM,CGPA)VALUES('Tarkeshwar','E03','EEE',26,'Male',6,8.45);
+
+1 row created.
+
+SQL> INSERT INTO STUDENT_2(STUDENT_NAME,ROLL,DEPT,AGE,GENDER,SEM,CGPA)VALUES('Neha','C04','CSE',23,'Female',6,8.45);
+
+1 row created.
+
+SQL> select * from STUDENT_2;
+
+STUDENT_NAM ROLL DEPT        AGE GENDER        SEM       CGPA                   
+----------- ---- ---- ---------- ------ ---------- ----------                   
+SHIV        I01  IT           28 Male            7        8.5                   
+Kaushal     I02  IT           27 Male            7        9.5                   
+Pragyan     I03  IT           25 Female          7        7.5                   
+Seenu       C01  CSE          25 Female          8        9.5                   
+Kunal       C02  CSE          28 Male            8       9.35                   
+Lokesh      C03  CSE          24 Male            8          8                   
+Amit        E01  ETC          27 Male            6        9.2                   
+Amrita      E02  ETC          22 Female          6       7.45                   
+Tarkeshwar  E03  EEE          26 Male            6       8.45                   
+Neha        C04  CSE          23 Female          6       8.45                   
+
+10 rows selected.
+
+SQL> select ROLL,AGE,GENDER from STUDENT_2 where DEPT='CSE' or DEPT='IT';
+
+ROLL        AGE GENDER                                                          
+---- ---------- ------                                                          
+I01          28 Male                                                            
+I02          27 Male                                                            
+I03          25 Female                                                          
+C01          25 Female                                                          
+C02          28 Male                                                            
+C03          24 Male                                                            
+C04          23 Female                                                          
+
+7 rows selected.
+ 
+
+
+SQL> select STUDENT_NAME,ROLL,DEPT from STUDENT_2 where CGPA BETWEEN 7.5 AND 9.5;
+
+STUDENT_NAM ROLL DEPT                                                           
+----------- ---- ----                                                           
+SHIV        I01  IT                                                             
+Kaushal     I02  IT                                                             
+Pragyan     I03  IT                                                             
+Seenu       C01  CSE                                                            
+Kunal       C02  CSE                                                            
+Lokesh      C03  CSE                                                            
+Amit        E01  ETC                                                            
+Tarkeshwar  E03  EEE                                                            
+Neha        C04  CSE                                                            
+
+9 rows selected.
+
+SQL> select * from STUDENT_2 order by CGPA desc;
+
+STUDENT_NAM ROLL DEPT        AGE GENDER        SEM       CGPA                   
+----------- ---- ---- ---------- ------ ---------- ----------                   
+Seenu       C01  CSE          25 Female          8        9.5                   
+Kaushal     I02  IT           27 Male            7        9.5                   
+Kunal       C02  CSE          28 Male            8       9.35                   
+Amit        E01  ETC          27 Male            6        9.2                   
+SHIV        I01  IT           28 Male            7        8.5                   
+Neha        C04  CSE          23 Female          6       8.45                   
+Tarkeshwar  E03  EEE          26 Male            6       8.45                   
+Lokesh      C03  CSE          24 Male            8          8                   
+Pragyan     I03  IT           25 Female          7        7.5                   
+Amrita      E02  ETC          22 Female          6       7.45                   
+
+10 rows selected.
+
+SQL> select * from STUDENT_2 order by STUDENT_NAME ASC;
+
+STUDENT_NAM ROLL DEPT        AGE GENDER        SEM       CGPA                   
+----------- ---- ---- ---------- ------ ---------- ----------                   
+Amit        E01  ETC          27 Male            6        9.2                   
+Amrita      E02  ETC          22 Female          6       7.45                   
+Kaushal     I02  IT           27 Male            7        9.5                   
+Kunal       C02  CSE          28 Male            8       9.35                   
+Lokesh      C03  CSE          24 Male            8          8                   
+Neha        C04  CSE          23 Female          6       8.45                   
+Pragyan     I03  IT           25 Female          7        7.5                   
+SHIV        I01  IT           28 Male            7        8.5                   
+Seenu       C01  CSE          25 Female          8        9.5                   
+Tarkeshwar  E03  EEE          26 Male            6       8.45                   
+
+10 rows selected.
+
+SQL> select SUM(AGE) from STUDENT_2;
+
+  SUM(AGE)                                                                      
+----------                                                                      
+       255                                                                      
+
+SQL> select AVG(CDPA) from STUDENT_2 where GENDER='Female' AND DEPT='CSE' OR DEPT='IT';
+select AVG(CDPA) from STUDENT_2 where GENDER='Female' AND DEPT='CSE' OR DEPT='IT'
+           *
+ERROR at line 1:
+ORA-00904: "CDPA": invalid identifier 
+
+
+SQL> select AVG(CGPA) from STUDENT_2 where GENDER='Female' AND DEPT='CSE' OR DEPT='IT';
+
+ AVG(CGPA)                                                                      
+----------                                                                      
+      8.69                                                                      
+
+SQL> select MAX(CGPA) from STUDENT_2;
+
+ MAX(CGPA)                                                                      
+----------                                                                      
+       9.5                                                                      
+
+SQL> select MIN(CGPA) from STUDENT_2;
+
+ MIN(CGPA)                                                                      
+----------                                                                      
+      7.45                                                                      
+
+
+SQL> select * from STUDENT_2 where AGE=(select MIN(AGE) from STUDENT_2);
+
+STUDENT_NAM ROLL DEPT        AGE GENDER        SEM       CGPA                   
+----------- ---- ---- ---------- ------ ---------- ----------                   
+Amrita      E02  ETC          22 Female          6       7.45                   
+
+SQL> select * from STUDENT_2 where AGE=(select MAX(AGE) from STUDENT_2);
+
+STUDENT_NAM ROLL DEPT        AGE GENDER        SEM       CGPA                   
+----------- ---- ---- ---------- ------ ---------- ----------                   
+SHIV        I01  IT           28 Male            7        8.5                   
+Kunal       C02  CSE          28 Male            8       9.35                   
+
+SQL> commit;
+
+Commit complete.
+
+SQL> spool off;

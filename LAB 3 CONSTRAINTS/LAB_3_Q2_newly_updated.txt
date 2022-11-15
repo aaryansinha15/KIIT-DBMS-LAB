@@ -1,0 +1,410 @@
+SQL> create table CUSTOMER(Cust_ID varchar2(4) not null,Cust_name varchar2(15) unique, Gender char(6) check(GENDER in('M','F','T')),Age number(3)check(Age>=18 AND Age<=80),City varchar2(20));
+
+Table created.
+
+SQL> desc CUSTOMER;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CUST_ID                                   NOT NULL VARCHAR2(4)
+ CUST_NAME                                          VARCHAR2(15)
+ GENDER                                             CHAR(6)
+ AGE                                                NUMBER(3)
+ CITY                                               VARCHAR2(20)
+
+SQL> insert into CUSTOMER(Cust_ID,Cust_name,Gender,Age,City)values(101,'Rohan','M',18,'CTC');
+
+1 row created.
+
+SQL> insert into CUSTOMER(Cust_ID,Cust_name,Gender,Age,City)values(102,'Ritu','F',35,'Lckn');
+
+1 row created.
+
+SQL> insert into CUSTOMER(Cust_ID,Cust_name,Gender,Age,City)values(103,'Basant','M',52,'Delhi');
+
+1 row created.
+
+SQL> insert into CUSTOMER(Cust_ID,Cust_name,Gender,Age,City)values(104,'Surbhi','F',43,'Delhi');
+
+1 row created.
+
+SQL> insert into CUSTOMER(Cust_ID,Cust_name,Gender,Age,City)values(105,'Ananya','F',18,'Delhi');
+
+1 row created.
+
+SQL> insert into CUSTOMER(Cust_ID,Cust_name,Gender,Age,City)values(106,'Dev','F',60,'CTC');
+
+1 row created.
+
+SQL> insert into CUSTOMER(Cust_ID,Cust_name,Gender,Age,City)values(107,'Aaryan','M',20,'DEL');
+
+1 row created.
+
+SQL> insert into CUSTOMER(Cust_ID,Cust_name,Gender,Age,City)values(108,'Umashankar','M',24,'BBSR');
+
+1 row created.
+
+SQL> select * from CUSTOMER;
+
+CUST CUST_NAME       GENDER        AGE CITY                                     
+---- --------------- ------ ---------- --------------------                     
+101  Rohan           M              18 CTC                                      
+102  Ritu            F              35 Lckn                                     
+103  Basant          M              52 Delhi                                    
+104  Surbhi          F              43 Delhi                                    
+105  Ananya          F              18 Delhi                                    
+106  Dev             F              60 CTC                                      
+107  Aaryan          M              20 DEL                                      
+108  Umashankar      M              24 BBSR                                     
+
+8 rows selected.
+
+SQL> insert into CUSTOMER(Cust_ID,Cust_name,Gender,Age,City)values(109,'Ram','M',30,'BBSR');
+
+1 row created.
+
+SQL> select * from CUSTOMER;
+
+CUST CUST_NAME       GENDER        AGE CITY                                     
+---- --------------- ------ ---------- --------------------                     
+101  Rohan           M              18 CTC                                      
+102  Ritu            F              35 Lckn                                     
+103  Basant          M              52 Delhi                                    
+104  Surbhi          F              43 Delhi                                    
+105  Ananya          F              18 Delhi                                    
+106  Dev             F              60 CTC                                      
+107  Aaryan          M              20 DEL                                      
+108  Umashankar      M              24 BBSR                                     
+109  Ram             M              30 BBSR                                     
+
+9 rows selected.
+
+SQL> insert into CUSTOMER(Cust_ID,Cust_name,Gender,Age,City)values(110,'Riya','F',24,'HYD');
+
+1 row created.
+
+SQL> select * from CUSTOMER;
+
+CUST CUST_NAME       GENDER        AGE CITY                                     
+---- --------------- ------ ---------- --------------------                     
+101  Rohan           M              18 CTC                                      
+102  Ritu            F              35 Lckn                                     
+103  Basant          M              52 Delhi                                    
+104  Surbhi          F              43 Delhi                                    
+105  Ananya          F              18 Delhi                                    
+106  Dev             F              60 CTC                                      
+107  Aaryan          M              20 DEL                                      
+108  Umashankar      M              24 BBSR                                     
+109  Ram             M              30 BBSR                                     
+110  Riya            F              24 HYD                                      
+
+10 rows selected.
+
+SQL> spool off;
+SQL> describe CUSTOMER;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CUST_ID                                   NOT NULL VARCHAR2(4)
+ CUST_NAME                                          VARCHAR2(15)
+ GENDER                                             CHAR(6)
+ AGE                                                NUMBER(3)
+ CITY                                               VARCHAR2(20)
+
+SQL> select * from CUSTOMER where CITY='BBSR' OR CITY='CTC';
+
+CUST CUST_NAME       GENDER        AGE CITY                                     
+---- --------------- ------ ---------- --------------------                     
+101  Rohan           M              18 CTC                                      
+106  Dev             F              60 CTC                                      
+108  Umashankar      M              24 BBSR                                     
+109  Ram             M              30 BBSR                                     
+
+SQL> select CUST_ID,CUST_NAME,AGE from CUSTOMER;
+
+CUST CUST_NAME              AGE                                                 
+---- --------------- ----------                                                 
+101  Rohan                   18                                                 
+102  Ritu                    35                                                 
+103  Basant                  52                                                 
+104  Surbhi                  43                                                 
+105  Ananya                  18                                                 
+106  Dev                     60                                                 
+107  Aaryan                  20                                                 
+108  Umashankar              24                                                 
+109  Ram                     30                                                 
+110  Riya                    24                                                 
+
+10 rows selected.
+
+SQL> ALTER table CUSTOMER PURCHASE_AMOUNT number(20);
+ALTER table CUSTOMER PURCHASE_AMOUNT number(20)
+                     *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option 
+
+
+SQL> ALTER table CUSTOMER ADD PURCHASE_AMOUNT number(20);
+
+Table altered.
+
+SQL> describe CUSTOMER;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CUST_ID                                   NOT NULL VARCHAR2(4)
+ CUST_NAME                                          VARCHAR2(15)
+ GENDER                                             CHAR(6)
+ AGE                                                NUMBER(3)
+ CITY                                               VARCHAR2(20)
+ PURCHASE_AMOUNT                                    NUMBER(20)
+
+SQL> select * from CUSTOMER;
+
+CUST CUST_NAME       GENDER        AGE CITY                 PURCHASE_AMOUNT     
+---- --------------- ------ ---------- -------------------- ---------------     
+101  Rohan           M              18 CTC                                      
+102  Ritu            F              35 Lckn                                     
+103  Basant          M              52 Delhi                                    
+104  Surbhi          F              43 Delhi                                    
+105  Ananya          F              18 Delhi                                    
+106  Dev             F              60 CTC                                      
+107  Aaryan          M              20 DEL                                      
+108  Umashankar      M              24 BBSR                                     
+109  Ram             M              30 BBSR                                     
+110  Riya            F              24 HYD                                      
+
+10 rows selected.
+
+SQL> ALTER TABLE CUSTOMER ADD CONSTRAINT NOT NULL(PURCHASE_AMOUNT);
+ALTER TABLE CUSTOMER ADD CONSTRAINT NOT NULL(PURCHASE_AMOUNT)
+                                             *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option 
+
+
+SQL> ALTER TABLE CUSTOMER ADD CONSTRAINT NOT NULL(PURCHASE_AMOUNT);
+ALTER TABLE CUSTOMER ADD CONSTRAINT NOT NULL(PURCHASE_AMOUNT)
+                                             *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option 
+
+
+SQL> ALTER TABLE CUSTOMER DROP PURCHASE_AMOUNT;
+ALTER TABLE CUSTOMER DROP PURCHASE_AMOUNT
+                          *
+ERROR at line 1:
+ORA-00905: missing keyword 
+
+
+SQL> ALTER TABLE CUSTOMER DROP COLUMN PURCHASE_AMOUNT;
+
+Table altered.
+
+SQL> DESC COLUMN;
+ERROR:
+ORA-00931: missing identifier 
+
+
+SQL> DESC CUSTOMER;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CUST_ID                                   NOT NULL VARCHAR2(4)
+ CUST_NAME                                          VARCHAR2(15)
+ GENDER                                             CHAR(6)
+ AGE                                                NUMBER(3)
+ CITY                                               VARCHAR2(20)
+
+SQL> ALTER table CUSTOMER ADD PURCHASE_AMOUNT number(20) NOT NULL'
+  2  ALTER table CUSTOMER ADD PURCHASE_AMOUNT number(20) NOT NULL;
+ALTER table CUSTOMER ADD PURCHASE_AMOUNT number(20) NOT NULL'
+                                                            *
+ERROR at line 1:
+ORA-01756: quoted string not properly terminated 
+
+
+SQL> ALTER table CUSTOMER ADD PURCHASE_AMOUNT number(20) NOT NULL;
+ALTER table CUSTOMER ADD PURCHASE_AMOUNT number(20) NOT NULL
+            *
+ERROR at line 1:
+ORA-01758: table must be empty to add mandatory (NOT NULL) column 
+
+
+SQL> ALTER table CUSTOMER ADD PURCHASE_AMOUNT number(20);
+
+Table altered.
+
+SQL> select * from CUSTOMER where CUST_NAME LIKE 'A%' OR CUST_NAME LIKE '%a';
+
+CUST CUST_NAME       GENDER        AGE CITY                 PURCHASE_AMOUNT     
+---- --------------- ------ ---------- -------------------- ---------------     
+107  Aaryan          M              20 DEL                                      
+105  Ananya          F              18 Delhi                                    
+110  Riya            F              24 HYD                                      
+
+SQL> select * from CUSTOMER where GENDER=
+  2  select * from CUSTOMER where GENDER=
+  3  select * from CUSTOMER;
+select * from CUSTOMER where GENDER=
+*
+ERROR at line 2:
+ORA-00936: missing expression 
+
+
+SQL> select * from CUSTOMER;
+
+CUST CUST_NAME       GENDER        AGE CITY                 PURCHASE_AMOUNT     
+---- --------------- ------ ---------- -------------------- ---------------     
+101  Rohan           M              18 CTC                                      
+102  Ritu            F              35 Lckn                                     
+103  Basant          M              52 Delhi                                    
+104  Surbhi          F              43 Delhi                                    
+105  Ananya          F              18 Delhi                                    
+106  Dev             F              60 CTC                                      
+107  Aaryan          M              20 DEL                                      
+108  Umashankar      M              24 BBSR                                     
+109  Ram             M              30 BBSR                                     
+110  Riya            F              24 HYD                                      
+
+10 rows selected.
+
+SQL> spool off;
+SQL> UPDATE CUTOMER SET PURCHASE_AMOUNT =4000 WHERE CUST_ID=101'
+  2  UPDATE CUTOMER SET PURCHASE_AMOUNT =4000 WHERE CUST_ID=101;
+ERROR:
+ORA-01756: quoted string not properly terminated 
+
+
+SQL> UPDATE CUTOMER SET PURCHASE_AMOUNT =4000 WHERE CUST_ID=101;
+UPDATE CUTOMER SET PURCHASE_AMOUNT =4000 WHERE CUST_ID=101
+       *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> UPDATE CUSTOMER SET PURCHASE_AMOUNT =4000 WHERE CUST_ID=101;
+
+1 row updated.
+
+SQL> SELECT * FROM CUSTOMER;
+
+CUST CUST_NAME       GENDER        AGE CITY                 PURCHASE_AMOUNT     
+---- --------------- ------ ---------- -------------------- ---------------     
+101  Rohan           M              18 CTC                             4000     
+102  Ritu            F              35 Lckn                                     
+103  Basant          M              52 Delhi                                    
+104  Surbhi          F              43 Delhi                                    
+105  Ananya          F              18 Delhi                                    
+106  Dev             F              60 CTC                                      
+107  Aaryan          M              20 DEL                                      
+108  Umashankar      M              24 BBSR                                     
+109  Ram             M              30 BBSR                                     
+110  Riya            F              24 HYD                                      
+
+10 rows selected.
+
+SQL> UPDATE CUSTOMER SET PURCHASE_AMOUNT =4537 WHERE CUST_ID=102;
+
+1 row updated.
+
+SQL> UPDATE CUSTOMER SET PURCHASE_AMOUNT =8673 WHERE CUST_ID=103;
+
+1 row updated.
+
+SQL> UPDATE CUSTOMER SET PURCHASE_AMOUNT =2932 WHERE CUST_ID=104;
+
+1 row updated.
+
+SQL> UPDATE CUSTOMER SET PURCHASE_AMOUNT =6453 WHERE CUST_ID=105;
+
+1 row updated.
+
+SQL> UPDATE CUSTOMER SET PURCHASE_AMOUNT =7824 WHERE CUST_ID=106;
+
+1 row updated.
+
+SQL> UPDATE CUSTOMER SET PURCHASE_AMOUNT =2365 WHERE CUST_ID=107;
+
+1 row updated.
+
+SQL> UPDATE CUSTOMER SET PURCHASE_AMOUNT =1023 WHERE CUST_ID=108;
+
+1 row updated.
+
+SQL> UPDATE CUSTOMER SET PURCHASE_AMOUNT =6268 WHERE CUST_ID=109;
+
+1 row updated.
+
+SQL> UPDATE CUSTOMER SET PURCHASE_AMOUNT =3832 WHERE CUST_ID=110;
+
+1 row updated.
+
+SQL> SELECT * FROM CUSTOMER;
+
+CUST CUST_NAME       GENDER        AGE CITY                 PURCHASE_AMOUNT     
+---- --------------- ------ ---------- -------------------- ---------------     
+101  Rohan           M              18 CTC                             4000     
+102  Ritu            F              35 Lckn                            4537     
+103  Basant          M              52 Delhi                           8673     
+104  Surbhi          F              43 Delhi                           2932     
+105  Ananya          F              18 Delhi                           6453     
+106  Dev             F              60 CTC                             7824     
+107  Aaryan          M              20 DEL                             2365     
+108  Umashankar      M              24 BBSR                            1023     
+109  Ram             M              30 BBSR                            6268     
+110  Riya            F              24 HYD                             3832     
+
+10 rows selected.
+
+SQL> alter table CUSTOMER MODIFY(PURCHASE_AMOUNT NOT NULL);
+
+Table altered.
+
+SQL> desc CUSTOMER;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CUST_ID                                   NOT NULL VARCHAR2(4)
+ CUST_NAME                                          VARCHAR2(15)
+ GENDER                                             CHAR(6)
+ AGE                                                NUMBER(3)
+ CITY                                               VARCHAR2(20)
+ PURCHASE_AMOUNT                           NOT NULL NUMBER(20)
+
+SQL> select * from CUSTOMER where GENDER='F' order by PURCHASE_AMOUNT desc;
+
+CUST CUST_NAME       GENDER        AGE CITY                 PURCHASE_AMOUNT     
+---- --------------- ------ ---------- -------------------- ---------------     
+106  Dev             F              60 CTC                             7824     
+105  Ananya          F              18 Delhi                           6453     
+102  Ritu            F              35 Lckn                            4537     
+110  Riya            F              24 HYD                             3832     
+104  Surbhi          F              43 Delhi                           2932     
+
+SQL> spool off;
+
+SQL> select CUST_NAME,CITY from CUSTOMER where GENDER='M' AND PURCHASE_AMOUNT>=5000;
+
+CUST_NAME       CITY
+--------------- --------------------
+Basant          Delhi
+Ram             BBSR
+
+SQL> select * from CUSTOMER where CUST_NAME LIKE'A%' OR CUST_NAME LIKE '%a';
+
+CUST CUST_NAME       GENDER        AGE CITY                 PURCHASE_AMOUNT
+---- --------------- ------ ---------- -------------------- ---------------
+105  Ananya          F              18 Delhi                           6453
+107  Aaryan          M              20 DEL                             2365
+110  Riya            F              24 HYD                             3832
+
+SQL> select * from CUSTOMER where GENDER='F' order by PURCHASE_AMOUNT DESC;
+
+CUST CUST_NAME       GENDER        AGE CITY                 PURCHASE_AMOUNT
+---- --------------- ------ ---------- -------------------- ---------------
+106  Dev             F              60 CTC                             7824
+105  Ananya          F              18 Delhi                           6453
+102  Ritu            F              35 Lckn                            4537
+110  Riya            F              24 HYD                             3832
+104  Surbhi          F              43 Delhi                           2932
+
+SQL>
+
+
+

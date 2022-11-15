@@ -1,0 +1,163 @@
+
+SQL> create table studn(sid number(10),sname varchar2(10),sem number(10),dept varchar2(10));
+
+Table created.
+
+SQL>  insert into studn values(100,'abc',1,'it');
+
+1 row created.
+
+SQL>  insert into studn values(101,'xyz',2,'cse');
+
+1 row created.
+
+SQL>  insert into studn values(102,'pqr',3,'mech');
+
+1 row created.
+
+SQL> insert into studn values(103,'mns',4,'elec');
+
+1 row created.
+
+SQL>  insert into studn values(104,'efg',5,'eee');
+
+1 row created.
+
+SQL> select * from studn;
+
+       SID SNAME             SEM DEPT                                           
+---------- ---------- ---------- ----------                                     
+       100 abc                 1 it                                             
+       101 xyz                 2 cse                                            
+       102 pqr                 3 mech                                           
+       103 mns                 4 elec                                           
+       104 efg                 5 eee                                            
+
+SQL> create table course(cid number(10),cname varchar2(10),incharge varchar2(10));
+
+Table created.
+
+SQL>  insert into course values(01,'it','abc');
+
+1 row created.
+
+SQL>  insert into course values(02,'cse','xyz');
+
+1 row created.
+
+SQL>  insert into course values(03,'mech','mns');
+
+1 row created.
+
+SQL>  insert into course values(04,'eee','pqr');
+
+1 row created.
+
+SQL>  insert into course values(05,'elec','def');
+
+1 row created.
+
+SQL> select * from course;
+
+       CID CNAME      INCHARGE                                                  
+---------- ---------- ----------                                                
+         1 it         abc                                                       
+         2 cse        xyz                                                       
+         3 mech       mns                                                       
+         4 eee        pqr                                                       
+         5 elec       def                                                       
+
+SQL>  create table enroll(sid number(10),sname varchar2(10),cid number(10),cname varchar2(10));
+
+Table created.
+
+SQL>  insert into enroll (sid,sname) values (100,'abc');
+
+1 row created.
+
+SQL>  insert into enroll (sid,sname) values (101,'xyz');
+
+1 row created.
+
+SQL>  insert into enroll (sid,sname) values (103,'pqr');
+
+1 row created.
+
+SQL>  insert into enroll values (102,'mns',5,'elec');
+
+1 row created.
+
+SQL>  insert into enroll values (104,'efg',4,'eee');
+
+1 row created.
+
+SQL> select * from enroll;
+
+       SID SNAME             CID CNAME                                          
+---------- ---------- ---------- ----------                                     
+       100 abc                                                                  
+       101 xyz                                                                  
+       103 pqr                                                                  
+       102 mns                 5 elec                                           
+       104 efg                 4 eee                                            
+
+SQL> select * from studn;
+
+       SID SNAME             SEM DEPT                                           
+---------- ---------- ---------- ----------                                     
+       100 abc                 1 it                                             
+       101 xyz                 2 cse                                            
+       102 pqr                 3 mech                                           
+       103 mns                 4 elec                                           
+       104 efg                 5 eee                                            
+
+SQL> select * from course;
+
+       CID CNAME      INCHARGE                                                  
+---------- ---------- ----------                                                
+         1 it         abc                                                       
+         2 cse        xyz                                                       
+         3 mech       mns                                                       
+         4 eee        pqr                                                       
+         5 elec       def                                                       
+
+SQL> select * from enroll left outer join course using(cid);
+
+       CID        SID SNAME      CNAME      CNAME      INCHARGE                 
+---------- ---------- ---------- ---------- ---------- ----------               
+         4        104 efg        eee        eee        pqr                      
+         5        102 mns        elec       elec       def                      
+                  100 abc                                                       
+                  101 xyz                                                       
+                  103 pqr                                                       
+
+SQL> select * from enroll right outer join course using(cid);
+
+       CID        SID SNAME      CNAME      CNAME      INCHARGE                 
+---------- ---------- ---------- ---------- ---------- ----------               
+         5        102 mns        elec       elec       def                      
+         4        104 efg        eee        eee        pqr                      
+         1                                  it         abc                      
+         2                                  cse        xyz                      
+         3                                  mech       mns                      
+
+SQL> select * from enroll full outer join course using(cid);
+
+       CID        SID SNAME      CNAME      CNAME      INCHARGE                 
+---------- ---------- ---------- ---------- ---------- ----------               
+         1                                  it         abc                      
+         2                                  cse        xyz                      
+         3                                  mech       mns                      
+         4        104 efg        eee        eee        pqr                      
+         5        102 mns        elec       elec       def                      
+                  100 abc                                                       
+                  101 xyz                                                       
+                  103 pqr                                                       
+
+8 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> spool off;

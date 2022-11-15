@@ -1,0 +1,278 @@
+SQL> create table PRODUCT(P_ID INTEGER,P_NAME VARCHAR2(8),COLOR CHAR(5),MFG_YR INTEGER,EXP_YR INTEGER,PRICE NUMBER(7,2));
+
+Table created.
+
+SQL>  describe PRODUCT;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ P_ID                                               NUMBER(38)
+ P_NAME                                             VARCHAR2(8)
+ COLOR                                              CHAR(5)
+ MFG_YR                                             NUMBER(38)
+ EXP_YR                                             NUMBER(38)
+ PRICE                                              NUMBER(7,2)
+
+SQL> insert into PRODUCT(P_ID,P_NAME,COLOR,MFG_YR,EXP_YR,PRICE)VALUES(100,'mobile','black',2015,2020,8499);
+
+1 row created.
+
+SQL> select * from PRODUCT;
+
+      P_ID P_NAME   COLOR     MFG_YR     EXP_YR      PRICE                      
+---------- -------- ----- ---------- ---------- ----------                      
+       100 mobile   black       2015       2020       8499                      
+
+SQL> insert into PRODUCT(P_ID,P_NAME,COLOR,MFG_YR,EXP_YR,PRICE)VALUES(101,'earphone','white',2017,2020,499.99);
+
+1 row created.
+
+SQL> insert into PRODUCT(P_ID,P_NAME,COLOR,MFG_YR,EXP_YR,PRICE)VALUES(102,'speaker','red',2018,2022,899.49);
+
+1 row created.
+
+SQL> insert into PRODUCT(P_ID,P_NAME,COLOR,MFG_YR,EXP_YR,PRICE)VALUES(103,'keyboard','black',2013,2020,1299.49);
+
+1 row created.
+
+SQL> insert into PRODUCT(P_ID,P_NAME,COLOR,MFG_YR,EXP_YR,PRICE)VALUES(104,'monitor','blue',2017,2030,9100.49);
+
+1 row created.
+
+SQL> insert into PRODUCT(P_ID,P_NAME,COLOR,MFG_YR,EXP_YR,PRICE)VALUES(105,'hdd','black',2014,2030,3500.49);
+
+1 row created.
+
+SQL>  insert into PRODUCT(P_ID,P_NAME,COLOR,MFG_YR,EXP_YR,PRICE)VALUES(106,'mouse','white',2016,2022,500.49);
+
+1 row created.
+
+SQL> insert into PRODUCT(P_ID,P_NAME,COLOR,MFG_YR,EXP_YR,PRICE)VALUES(107,'pen drive','green',2013,2022,300.49);
+insert into PRODUCT(P_ID,P_NAME,COLOR,MFG_YR,EXP_YR,PRICE)VALUES(107,'pen drive','green',2013,2022,300.49)
+                                                                     *
+ERROR at line 1:
+ORA-12899: value too large for column "DB1796"."PRODUCT"."P_NAME" (actual: 9, 
+maximum: 8) 
+
+
+SQL> describe STUDENT;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ NAME                                               VARCHAR2(8)
+ ROLL                                               NUMBER(38)
+ DEPT                                               CHAR(4)
+ AGE                                                NUMBER(38)
+ GENDER                                             CHAR(6)
+ SEM                                                NUMBER(38)
+ CITY                                               VARCHAR2(10)
+ CGPA                                               NUMBER(5,3)
+ BAL_FEE                                            NUMBER(20)
+
+SQL> alter table PRODUCT MODIFY(P_NAME VARCHAR2(10));
+
+Table altered.
+
+SQL> DESCRIBE PRODUCT;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ P_ID                                               NUMBER(38)
+ P_NAME                                             VARCHAR2(10)
+ COLOR                                              CHAR(5)
+ MFG_YR                                             NUMBER(38)
+ EXP_YR                                             NUMBER(38)
+ PRICE                                              NUMBER(7,2)
+
+SQL> insert into PRODUCT(P_ID,P_NAME,COLOR,MFG_YR,EXP_YR,PRICE)VALUES(107,'pen drive','green',2013,2022,300.49);
+
+1 row created.
+
+SQL> SELECT * FROM PRODUCT;
+
+      P_ID P_NAME     COLOR     MFG_YR     EXP_YR      PRICE                    
+---------- ---------- ----- ---------- ---------- ----------                    
+       100 mobile     black       2015       2020       8499                    
+       101 earphone   white       2017       2020     499.99                    
+       102 speaker    red         2018       2022     899.49                    
+       103 keyboard   black       2013       2020    1299.49                    
+       104 monitor    blue        2017       2030    9100.49                    
+       105 hdd        black       2014       2030    3500.49                    
+       106 mouse      white       2016       2022     500.49                    
+       107 pen drive  green       2013       2022     300.49                    
+
+8 rows selected.
+
+SQL> select P_ID,COLOR from PRODUCT;
+
+      P_ID COLOR                                                                
+---------- -----                                                                
+       100 black                                                                
+       101 white                                                                
+       102 red                                                                  
+       103 black                                                                
+       104 blue                                                                 
+       105 black                                                                
+       106 white                                                                
+       107 green                                                                
+
+8 rows selected.
+
+SQL> select *from PRODUCT where color ='red';
+
+      P_ID P_NAME     COLOR     MFG_YR     EXP_YR      PRICE                    
+---------- ---------- ----- ---------- ---------- ----------                    
+       102 speaker    red         2018       2022     899.49                    
+
+SQL> select P_NAME,PRICE from PRODUCT where MFG_YR=2017;
+
+P_NAME          PRICE                                                           
+---------- ----------                                                           
+earphone       499.99                                                           
+monitor       9100.49                                                           
+
+SQL> alter table PRODUCT ADD(LOP INTEGER);
+
+Table altered.
+
+SQL> DESCRIBE PRODUCT;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ P_ID                                               NUMBER(38)
+ P_NAME                                             VARCHAR2(10)
+ COLOR                                              CHAR(5)
+ MFG_YR                                             NUMBER(38)
+ EXP_YR                                             NUMBER(38)
+ PRICE                                              NUMBER(7,2)
+ LOP                                                NUMBER(38)
+
+SQL> SELECT * FROM PRODUCT;
+
+      P_ID P_NAME     COLOR     MFG_YR     EXP_YR      PRICE        LOP         
+---------- ---------- ----- ---------- ---------- ---------- ----------         
+       100 mobile     black       2015       2020       8499                    
+       101 earphone   white       2017       2020     499.99                    
+       102 speaker    red         2018       2022     899.49                    
+       103 keyboard   black       2013       2020    1299.49                    
+       104 monitor    blue        2017       2030    9100.49                    
+       105 hdd        black       2014       2030    3500.49                    
+       106 mouse      white       2016       2022     500.49                    
+       107 pen drive  green       2013       2022     300.49                    
+
+8 rows selected.
+
+SQL> UPDATE PRODUCT SET LOP = 5 WHERE P_ID=100;
+
+1 row updated.
+
+SQL> SELECT * FROM PRODUCT;
+
+      P_ID P_NAME     COLOR     MFG_YR     EXP_YR      PRICE        LOP         
+---------- ---------- ----- ---------- ---------- ---------- ----------         
+       100 mobile     black       2015       2020       8499          5         
+       101 earphone   white       2017       2020     499.99                    
+       102 speaker    red         2018       2022     899.49                    
+       103 keyboard   black       2013       2020    1299.49                    
+       104 monitor    blue        2017       2030    9100.49                    
+       105 hdd        black       2014       2030    3500.49                    
+       106 mouse      white       2016       2022     500.49                    
+       107 pen drive  green       2013       2022     300.49                    
+
+8 rows selected.
+
+SQL> UPDATE PRODUCT SET LOP = 3 WHERE P_ID=101;
+
+1 row updated.
+
+SQL> UPDATE PRODUCT SET LOP = 4 WHERE P_ID=102;
+
+1 row updated.
+
+SQL> UPDATE PRODUCT SET LOP = 7 WHERE P_ID=103;
+
+1 row updated.
+
+SQL> UPDATE PRODUCT SET LOP = 13 WHERE P_ID=104;
+
+1 row updated.
+
+SQL>  UPDATE PRODUCT SET LOP = 16 WHERE P_ID=105;
+
+1 row updated.
+
+SQL> UPDATE PRODUCT SET LOP = 6 WHERE P_ID=106;
+
+1 row updated.
+
+SQL> UPDATE PRODUCT SET LOP = 9 WHERE P_ID=107;
+
+1 row updated.
+
+SQL> SELECT * FROM PRODUCT;
+
+      P_ID P_NAME     COLOR     MFG_YR     EXP_YR      PRICE        LOP         
+---------- ---------- ----- ---------- ---------- ---------- ----------         
+       100 mobile     black       2015       2020       8499          5         
+       101 earphone   white       2017       2020     499.99          3         
+       102 speaker    red         2018       2022     899.49          4         
+       103 keyboard   black       2013       2020    1299.49          7         
+       104 monitor    blue        2017       2030    9100.49         13         
+       105 hdd        black       2014       2030    3500.49         16         
+       106 mouse      white       2016       2022     500.49          6         
+       107 pen drive  green       2013       2022     300.49          9         
+
+8 rows selected.
+
+SQL> SELECT *FROM PRODUCT WHERE LOP<10;
+
+      P_ID P_NAME     COLOR     MFG_YR     EXP_YR      PRICE        LOP         
+---------- ---------- ----- ---------- ---------- ---------- ----------         
+       100 mobile     black       2015       2020       8499          5         
+       101 earphone   white       2017       2020     499.99          3         
+       102 speaker    red         2018       2022     899.49          4         
+       103 keyboard   black       2013       2020    1299.49          7         
+       106 mouse      white       2016       2022     500.49          6         
+       107 pen drive  green       2013       2022     300.49          9         
+
+6 rows selected.
+
+SQL> SELECT P_ID,P_NAME,COLOR FROM PRODUCT WHERE LOP=4;
+
+      P_ID P_NAME     COLOR                                                     
+---------- ---------- -----                                                     
+       102 speaker    red                                                       
+
+SQL> DELETE FROM PRODUCT WHERE MFG_YR = 2015;
+
+1 row deleted.
+
+SQL> SELECT * FROM PRODUCT;
+
+      P_ID P_NAME     COLOR     MFG_YR     EXP_YR      PRICE        LOP         
+---------- ---------- ----- ---------- ---------- ---------- ----------         
+       101 earphone   white       2017       2020     499.99          3         
+       102 speaker    red         2018       2022     899.49          4         
+       103 keyboard   black       2013       2020    1299.49          7         
+       104 monitor    blue        2017       2030    9100.49         13         
+       105 hdd        black       2014       2030    3500.49         16         
+       106 mouse      white       2016       2022     500.49          6         
+       107 pen drive  green       2013       2022     300.49          9         
+
+7 rows selected.
+
+SQL> ALTER TABLE PRODUCT DROP COLUMN COLOR;
+
+Table altered.
+
+SQL> SELECT * FROM PRODUCT;
+
+      P_ID P_NAME         MFG_YR     EXP_YR      PRICE        LOP               
+---------- ---------- ---------- ---------- ---------- ----------               
+       101 earphone         2017       2020     499.99          3               
+       102 speaker          2018       2022     899.49          4               
+       103 keyboard         2013       2020    1299.49          7               
+       104 monitor          2017       2030    9100.49         13               
+       105 hdd              2014       2030    3500.49         16               
+       106 mouse            2016       2022     500.49          6               
+       107 pen drive        2013       2022     300.49          9               
+
+7 rows selected.
+
+SQL> spool off;

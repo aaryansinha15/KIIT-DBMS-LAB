@@ -1,0 +1,223 @@
+SQL> CREATE TABLE SUPPLIER(sid NUMBER(4),sname char(4),location char(4));
+
+Table created.
+
+SQL> insert into SUPPLIER(sid,sname,location)values(100,'ss','ab');
+
+1 row created.
+
+SQL> insert into SUPPLIER(sid,sname,location)values(101,'sb','ac');
+
+1 row created.
+
+SQL> insert into SUPPLIER(sid,sname,location)values(102,'sc','ad');
+
+1 row created.
+
+SQL> insert into SUPPLIER(sid,sname,location)values(103,'sd','ae');
+
+1 row created.
+
+SQL> insert into SUPPLIER(sid,sname,location)values(104,'se','af');
+
+1 row created.
+
+SQL> CREATE TABLE Part(pid NUMBER(4),pname char(4),color varchar2(10));
+
+Table created.
+
+SQL> insert into PART(pid,pname,color)values(200,'pa','red');
+
+1 row created.
+
+SQL> insert into PART(pid,pname,color)values(201,'pb','blue');
+
+1 row created.
+
+SQL> insert into PART(pid,pname,color)values(202,'pc','green');
+
+1 row created.
+
+SQL> insert into PART(pid,pname,color)values(203,'pd','yellow');
+
+1 row created.
+
+SQL> insert into PART(pid,pname,color)values(204,'pd','orange');
+
+1 row created.
+
+SQL>  create table catalogue(sid number(10),pid number(10),cost number(10));
+
+Table created.
+
+SQL> insert into catalogue values(100,200,10);
+
+1 row created.
+
+SQL>  insert into catalogue values(101,201,20);
+
+1 row created.
+
+SQL>  insert into catalogue values(102,202,30);
+
+1 row created.
+
+SQL>  insert into catalogue values(103,203,40);
+
+1 row created.
+
+SQL>  insert into catalogue values(104,204,50);
+
+1 row created.
+
+SQL>  insert into catalogue values(105,205,60);
+
+1 row created.
+
+SQL> insert into catalogue values(106,206,70);
+
+1 row created.
+
+SQL>  insert into catalogue values(107,207,80);
+
+1 row created.
+
+SQL>  insert into catalogue values(108,208,90);
+
+1 row created.
+
+SQL>  insert into catalogue values(109,209,100);
+
+1 row created.
+
+SQL>  insert into catalogue values(110,210,110);
+
+1 row created.
+
+SQL>  insert into catalogue values(111,211,120);
+
+1 row created.
+
+SQL>  insert into catalogue values(112,213,130);
+
+1 row created.
+
+SQL>  insert into catalogue values(113,213,140);
+
+1 row created.
+
+SQL>  insert into catalogue values(114,214,150);
+
+1 row created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from SUPPLIER;
+
+       SID SNAM LOCA                                                            
+---------- ---- ----                                                            
+       100 ss   ab                                                              
+       101 sb   ac                                                              
+       102 sc   ad                                                              
+       103 sd   ae                                                              
+       104 se   af                                                              
+
+SQL> select * from Part;
+
+       PID PNAM COLOR                                                           
+---------- ---- ----------                                                      
+       200 pa   red                                                             
+       201 pb   blue                                                            
+       202 pc   green                                                           
+       203 pd   yellow                                                          
+       204 pd   orange                                                          
+
+SQL> select * from catalogue;
+
+       SID        PID       COST
+---------- ---------- ----------
+       100        200         10
+       101        201         20
+       102        202         30
+       103        203         40
+       104        204         50
+       105        205         60
+       106        206         70
+       107        207         80
+       108        208         90
+       109        209        100
+       110        210        110
+
+       SID        PID       COST
+---------- ---------- ----------
+       111        211        120
+       112        213        130
+       113        213        140
+       114        214        150
+
+15 rows selected.
+
+SQL> spool off;
+SQL> select sid from(select * from catalogue left outer join part using(pid) where color='red';
+select sid from(select * from catalogue left outer join part using(pid) where color='red'
+                                                                                        *
+ERROR at line 1:
+ORA-00907: missing right parenthesis 
+
+
+SQL> select sid from(select * from catalogue left outer join part using(pid) where color='red');
+
+       SID                                                                      
+----------                                                                      
+       100                                                                      
+
+SQL> select sid,location from(select * from supplier left outer join(select * from catalogue left outer join part using(pid) using (sid) where color='green');
+select sid,location from(select * from supplier left outer join(select * from catalogue left outer join part using(pid) using (sid) where color='green')
+                                                                                                                        *
+ERROR at line 1:
+ORA-00907: missing right parenthesis 
+
+
+SQL> select sid,location from(select * from supplier left outer join(select * from catalogue left outer join part using(pid)) using (sid)) where color='green';
+
+       SID LOCA                                                                 
+---------- ----                                                                 
+       102 ad                                                                   
+
+SQL> select sid from(select * from catalogue left outer join part using (pid)) where color='red' or color='blue';
+
+       SID                                                                      
+----------                                                                      
+       100                                                                      
+       101                                                                      
+
+SQL> select sid,sname,location from(select * from supplier left outer join(select * from catalogue left outer join part using(pid))using(sid) where color='red';
+select sid,sname,location from(select * from supplier left outer join(select * from catalogue left outer join part using(pid))using(sid) where color='red'
+                                                                                                                                                         *
+ERROR at line 1:
+ORA-00907: missing right parenthesis 
+
+
+SQL> select sid,sname,location from(select * from supplier left outer join(select * from catalogue left outer join part using(pid))using(sid) where color='red');
+
+       SID SNAM LOCA                                                            
+---------- ---- ----                                                            
+       100 ss   ab                                                              
+
+SQL> select sid,sname,location from(select * from supplier left outer join(select * from catalogue left outer join(select * from part minus select * from part where color='green')using(pid))using(sid));
+
+       SID SNAM LOCA                                                            
+---------- ---- ----                                                            
+       100 ss   ab                                                              
+       101 sb   ac                                                              
+       103 sd   ae                                                              
+       104 se   af                                                              
+       102 sc   ad                                                              
+
+SQL> commit;
+
+Commit complete.
+
+SQL> spool off;

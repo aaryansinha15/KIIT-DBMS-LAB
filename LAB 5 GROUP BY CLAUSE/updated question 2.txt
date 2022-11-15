@@ -1,0 +1,253 @@
+SQL> create table Studentt(Yoa number(4),roll number(2),sec varchar2(2) check(sec in('CS','IT')),Group_ varchar2(7) check(Group_ in('Group-4','Group-6','Group-7')),Contribution number(5,2));
+
+Table created.
+
+SQL> drop table studentt;
+
+Table dropped.
+
+SQL> create table Studentt(Yoa number(4),roll number(2),Sec varchar2(2) check(Sec in('CS','IT')),Grp varchar2(7) check(Grp in('Group-4','Group-6','Group-7')),Contribution number(5,2));
+
+Table created.
+
+SQL> insert into studentt values(2018,1,'CS','Group-4',90.5);
+
+1 row created.
+
+SQL> insert into studentt values(2018,2,'CS','Group-6',89);
+
+1 row created.
+
+SQL> insert into studentt values(2018,3,'CS','Group-6',87);
+
+1 row created.
+
+SQL> insert into studentt values(2017,4,'IT','Group-7',93);
+
+1 row created.
+
+SQL> insert into studentt values(2019,11,'IT','Group-4',84);
+
+1 row created.
+
+SQL> insert into studentt values(2015,17,'IT','Group-7',99);
+
+1 row created.
+
+SQL> insert into studentt values(2020,32,'CS','Group-4',85);
+
+1 row created.
+
+SQL> insert into studentt values(2021,28,'CS','Group-4',76);
+
+1 row created.
+
+SQL> insert into studentt values(2019,49,'IT','Group-7',98);
+
+1 row created.
+
+SQL> insert into studentt values(2017,51,'CS','Group-6',93);
+
+1 row created.
+
+SQL> select * from studentt;
+
+       YOA       ROLL SE GRP     CONTRIBUTION                                                                                                                                                           
+---------- ---------- -- ------- ------------                                                                                                                                                           
+      2018          1 CS Group-4         90.5                                                                                                                                                           
+      2018          2 CS Group-6           89                                                                                                                                                           
+      2018          3 CS Group-6           87                                                                                                                                                           
+      2017          4 IT Group-7           93                                                                                                                                                           
+      2019         11 IT Group-4           84                                                                                                                                                           
+      2015         17 IT Group-7           99                                                                                                                                                           
+      2020         32 CS Group-4           85                                                                                                                                                           
+      2021         28 CS Group-4           76                                                                                                                                                           
+      2019         49 IT Group-7           98                                                                                                                                                           
+      2017         51 CS Group-6           93                                                                                                                                                           
+
+10 rows selected.
+
+SQL> select * from studentt order by yoa;
+
+       YOA       ROLL SE GRP     CONTRIBUTION                                                                                                                                                           
+---------- ---------- -- ------- ------------                                                                                                                                                           
+      2015         17 IT Group-7           99                                                                                                                                                           
+      2017          4 IT Group-7           93                                                                                                                                                           
+      2017         51 CS Group-6           93                                                                                                                                                           
+      2018          1 CS Group-4         90.5                                                                                                                                                           
+      2018          2 CS Group-6           89                                                                                                                                                           
+      2018          3 CS Group-6           87                                                                                                                                                           
+      2019         11 IT Group-4           84                                                                                                                                                           
+      2019         49 IT Group-7           98                                                                                                                                                           
+      2020         32 CS Group-4           85                                                                                                                                                           
+      2021         28 CS Group-4           76                                                                                                                                                           
+
+10 rows selected.
+
+SQL> select * from studentt order by roll;
+
+       YOA       ROLL SE GRP     CONTRIBUTION                                                                                                                                                           
+---------- ---------- -- ------- ------------                                                                                                                                                           
+      2018          1 CS Group-4         90.5                                                                                                                                                           
+      2018          2 CS Group-6           89                                                                                                                                                           
+      2018          3 CS Group-6           87                                                                                                                                                           
+      2017          4 IT Group-7           93                                                                                                                                                           
+      2019         11 IT Group-4           84                                                                                                                                                           
+      2015         17 IT Group-7           99                                                                                                                                                           
+      2021         28 CS Group-4           76                                                                                                                                                           
+      2020         32 CS Group-4           85                                                                                                                                                           
+      2019         49 IT Group-7           98                                                                                                                                                           
+      2017         51 CS Group-6           93                                                                                                                                                           
+
+10 rows selected.
+
+SQL> select * from studentt order by cONTRIBUTION;
+
+       YOA       ROLL SE GRP     CONTRIBUTION                                                                                                                                                           
+---------- ---------- -- ------- ------------                                                                                                                                                           
+      2021         28 CS Group-4           76                                                                                                                                                           
+      2019         11 IT Group-4           84                                                                                                                                                           
+      2020         32 CS Group-4           85                                                                                                                                                           
+      2018          3 CS Group-6           87                                                                                                                                                           
+      2018          2 CS Group-6           89                                                                                                                                                           
+      2018          1 CS Group-4         90.5                                                                                                                                                           
+      2017          4 IT Group-7           93                                                                                                                                                           
+      2017         51 CS Group-6           93                                                                                                                                                           
+      2019         49 IT Group-7           98                                                                                                                                                           
+      2015         17 IT Group-7           99                                                                                                                                                           
+
+10 rows selected.
+
+SQL> select count(*) from studentt;
+
+  COUNT(*)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+        10                                                                                                                                                                                              
+
+
+
+SQL> select sum(Contribution) from studentt where Grp='Group-6';
+
+SUM(CONTRIBUTION)                                                                                                                                                                                       
+-----------------                                                                                                                                                                                       
+              269                                                                                                                                                                                       
+
+SQL> select avg(Contribution) from studentt where Grp='Group-7';
+
+AVG(CONTRIBUTION)                                                                                                                                                                                       
+-----------------                                                                                                                                                                                       
+       96.6666667                                                                                                                                                                                       
+
+SQL> select max(Contribution) from studentt where Grp='Group-4';
+
+MAX(CONTRIBUTION)                                                                                                                                                                                       
+-----------------                                                                                                                                                                                       
+             90.5                                                                                                                                                                                       
+
+SQL> select min(Contribution) from studentt where Sec='CS';
+
+MIN(CONTRIBUTION)                                                                                                                                                                                       
+-----------------                                                                                                                                                                                       
+               76                                                                                                                                                                                       
+
+SQL> select roll from studentt where Contribution=(select max(Contribution) from studentt);
+
+      ROLL                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+        17                                                                                                                                                                                              
+
+SQL>  select Roll,Yoa from studentt where con=(select min(Contribution) from studentt);
+ select Roll,Yoa from studentt where con=(select min(Contribution) from studentt)
+                                     *
+ERROR at line 1:
+ORA-00904: "CON": invalid identifier 
+
+
+SQL>  select Roll,Yoa from studentt where Contribution=(select min(Contribution) from studentt);
+
+      ROLL        YOA                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+        28       2021                                                                                                                                                                                   
+
+SQL> select count(*) from studentt where Grp='Group-7';
+
+  COUNT(*)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+         3                                                                                                                                                                                              
+
+SQL> select count(*),Grp from studentt group by Grp;
+
+  COUNT(*) GRP                                                                                                                                                                                          
+---------- -------                                                                                                                                                                                      
+         4 Group-4                                                                                                                                                                                      
+         3 Group-7                                                                                                                                                                                      
+         3 Group-6                                                                                                                                                                                      
+
+SQL> select grp,sum(contribution) from studentt group by Grp;
+
+GRP     SUM(CONTRIBUTION)                                                                                                                                                                               
+------- -----------------                                                                                                                                                                               
+Group-4             335.5                                                                                                                                                                               
+Group-7               290                                                                                                                                                                               
+Group-6               269                                                                                                                                                                               
+
+SQL> select grp,avg(contribution) from studentt group by grp having avg(contribution)>90;
+
+GRP     AVG(CONTRIBUTION)                                                                                                                                                                               
+------- -----------------                                                                                                                                                                               
+Group-7        96.6666667                                                                                                                                                                               
+
+SQL> select sec,count(*),sum(contribution) from studentt group by sec;
+
+SE   COUNT(*) SUM(CONTRIBUTION)                                                                                                                                                                         
+-- ---------- -----------------                                                                                                                                                                         
+IT          4               374                                                                                                                                                                         
+CS          6             520.5                                                                                                                                                                         
+
+SQL> select sec,count(*),avg(con) from studentt group by sec;
+select sec,count(*),avg(con) from studentt group by sec
+                        *
+ERROR at line 1:
+ORA-00904: "CON": invalid identifier 
+
+
+SQL> select sec,count(*),avg(contribution) from studentt group by sec;
+
+SE   COUNT(*) AVG(CONTRIBUTION)                                                                                                                                                                         
+-- ---------- -----------------                                                                                                                                                                         
+IT          4              93.5                                                                                                                                                                         
+CS          6             86.75                                                                                                                                                                         
+
+SQL> select sec,count(*),sum(contribution) from studentt where yoa=2019 group by sec;
+
+SE   COUNT(*) SUM(CONTRIBUTION)                                                                                                                                                                         
+-- ---------- -----------------                                                                                                                                                                         
+IT          2               182                                                                                                                                                                         
+
+SQL> select sec,count(*),avg(con) from studentt where yoa=2019 group by sec;
+select sec,count(*),avg(con) from studentt where yoa=2019 group by sec
+                        *
+ERROR at line 1:
+ORA-00904: "CON": invalid identifier 
+
+
+SQL> select sec,count(*),avg(contribution) from studentt where yoa=2019 group by sec;
+
+SE   COUNT(*) AVG(CONTRIBUTION)                                                                                                                                                                         
+-- ---------- -----------------                                                                                                                                                                         
+IT          2                91                                                                                                                                                                         
+
+SQL> select yoa,max(contribution) from studentt group by yoa;
+
+       YOA MAX(CONTRIBUTION)                                                                                                                                                                            
+---------- -----------------                                                                                                                                                                            
+      2017                93                                                                                                                                                                            
+      2019                98                                                                                                                                                                            
+      2015                99                                                                                                                                                                            
+      2021                76                                                                                                                                                                            
+      2018              90.5                                                                                                                                                                            
+      2020                85                                                                                                                                                                            
+
+6 rows selected.
+
+SQL> spool of

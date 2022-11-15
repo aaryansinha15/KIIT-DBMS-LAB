@@ -1,0 +1,312 @@
+SQL> create table EMPLOYEE_ST(Emp_id varchar2(4),Emp_name varchar2(3),Age NUMBER(3),Gender varchar2(2),Dept varchar2(5));
+
+Table created.
+
+SQL> insert into EMPLOYEE_ST(Emp_id, Emp_name, Age, Gender, Dept)values('E01', 'A', 20, 'M', 'CSE');
+
+1 row created.
+
+SQL> insert into EMPLOYEE_ST(Emp_id, Emp_name, Age, Gender, Dept)values('E02', 'B', 25, 'F', 'CSE');
+
+1 row created.
+
+SQL> insert into EMPLOYEE_ST(Emp_id, Emp_name, Age, Gender, Dept)values('E03', 'C', 30, 'F', 'IT');
+
+1 row created.
+
+SQL> insert into EMPLOYEE_ST(Emp_id, Emp_name, Age, Gender, Dept)values('E04', 'D', 50, 'M', 'IT');
+
+1 row created.
+
+SQL> insert into EMPLOYEE_ST(Emp_id, Emp_name, Age, Gender, Dept)values('E05', 'E', 40, 'F', 'MGM');
+
+1 row created.
+
+SQL>create table DEPENDENT(Dep_id VARCHAR2(4),Dep_name VARCHAR2(3),Age number(2),D_gen varchar2(2),Relation varchar2(10),EID varchar2(4));
+
+SQL>insert into DEPENDENT(Dep_id, Dep_name, Age, D_gen, Relation, EID)values('D05', 'G', 40, 'M', 'Father', 'E01');
+
+SQL>insert into DEPENDENT(Dep_id, Dep_name, Age, D_gen, Relation, EID)values('D06', 'H', 12, 'M', 'Brother', 'E02');
+
+SQL> insert into DEPENDENT(Dep_id, Dep_name, Age, D_gen, Relation, EID)values('D08', 'J', 50, 'F', 'Mother', 'E04');
+
+SQL>insert into DEPENDENT(Dep_id, Dep_name, Age, D_gen, Relation, EID)values('D07', 'I', 10, 'F', 'Sister', 'E03');
+
+SQL>insert into DEPENDENT(Dep_id, Dep_name, Age, D_gen, Relation, EID)values('D09', 'K', 10, 'M', 'Son', 'E05');
+
+
+SQL> create table PROJECT(PID VARCHAR2(4),P_name varchar2(20),Inc varchar2(4));
+
+Table created.
+
+SQL> insert into PROJECT(PID, P_name, INC)values('P01', 'Database', 'E01');
+
+1 row created.
+
+SQL> insert into PROJECT(PID, P_name, INC)values('P02', 'Networking', 'E02');
+
+1 row created.
+
+SQL> insert into PROJECT(PID, P_name, INC)values('P03', 'Networking', 'E03');
+
+1 row created.
+
+SQL> insert into PROJECT(PID, P_name, INC)values('P04', 'Database', 'E04');
+
+1 row created.
+
+SQL> insert into PROJECT(PID, P_name, INC)values('P05', 'ML', 'E05');
+
+1 row created.
+
+SQL>create table ASSIGNED_TO(EID varchar2(4), P_ID varchar2(4));
+
+SQL> insert into ASSIGNED_TO(EID, P_ID)
+  2  values('E01', 'P01');
+
+1 row created.
+
+SQL> insert into ASSIGNED_TO(EID, P_ID)
+  2  values('E02', 'P01');
+
+1 row created.
+
+SQL> insert into ASSIGNED_TO(EID, P_ID)
+  2  values('E03', 'P01');
+
+1 row created.
+
+SQL> insert into ASSIGNED_TO(EID, P_ID)
+  2  values('E03', 'P02');
+
+1 row created.
+
+SQL> insert into ASSIGNED_TO(EID, P_ID)
+  2  values('E04', 'P02');
+
+1 row created.
+
+SQL> insert into ASSIGNED_TO(EID, P_ID)
+  2  values('E05', 'P02');
+
+1 row created.
+
+SQL> insert into ASSIGNED_TO(EID, P_ID)
+  2  values('E01', 'P02');
+
+1 row created.
+
+SQL> insert into ASSIGNED_TO(EID, P_ID)
+  2  values('E01', 'P03');
+
+1 row created.
+
+SQL> insert into ASSIGNED_TO(EID, P_ID)
+  2  values('E03', 'P03');
+
+1 row created.
+
+SQL> insert into ASSIGNED_TO(EID, P_ID)
+  2  values('E05', 'P03');
+
+1 row created.
+
+SQL> insert into ASSIGNED_TO(EID, P_ID)
+  2  values('E02', 'P04');
+
+1 row created.
+
+SQL> insert into ASSIGNED_TO(EID, P_ID)
+  2  values('E05', 'P04');
+
+1 row created.
+
+SQL> insert into ASSIGNED_TO(EID, P_ID)
+  2  values('E03', 'P05');
+
+1 row created.
+
+SQL> insert into ASSIGNED_TO(EID, P_ID)
+  2  values('E02', 'P05');
+
+1 row created.
+
+SQL> insert into ASSIGNED_TO(EID, P_ID)
+  2  values('E04', 'P05');
+
+1 row created.
+
+SQL> insert into ASSIGNED_TO(EID, P_ID)
+  2  values('E01', 'P04');
+
+1 row created.
+
+
+SQL> ------------------------------------------
+
+SQL> select * from EMPLOYEE_ST;
+
+EMP_ EMP        AGE GE DEPT
+---- --- ---------- -- -----
+E01  A           20 M  CSE
+E02  B           25 F  CSE
+E03  C           30 F  IT
+E04  D           50 M  IT
+E05  E           40 F  MGM
+
+SQL> select * from DEPENDENT;
+
+DEP_ DEP        AGE D_ RELATION   EID                                           
+---- --- ---------- -- ---------- ----                                          
+D05  G           40 M  Father     E01                                           
+D06  H           12 M  Brother    E02                                           
+D08  J           50 F  Mother     E04                                           
+D07  I           10 F  Sister     E03                                           
+D09  K           10 M  Son        E05                                           
+
+SQL> select * from PROJECT;
+
+PID  P_NAME               INC
+---- -------------------- ----
+P01  Database             E01
+P02  Networking           E02
+P03  Networking           E03
+P04  Database             E04
+P05  ML                   E05
+
+SQL> select * from ASSIGNED_TO;
+
+EID  P_ID                                                                       
+---- ----                                                                       
+E01  P01                                                                        
+E02  P01                                                                        
+E03  P01                                                                        
+E03  P02                                                                        
+E04  P02                                                                        
+E05  P02                                                                        
+E01  P02                                                                        
+E01  P03                                                                        
+E03  P03                                                                        
+E05  P03                                                                        
+E02  P04                                                                        
+
+EID  P_ID                                                                       
+---- ----                                                                       
+E05  P04                                                                        
+E03  P05                                                                        
+E02  P05                                                                        
+E04  P05                                                                        
+E01  P04                                                                        
+
+16 rows selected.
+
+SQL> spool off;SQL> spool off;
+SQL> select * from EMPLOYEE_ST cross join DEPENDENT;
+
+EMP_ EMP        AGE GE DEPT  DEP_ DEP        AGE D_ RELATION   EID              
+---- --- ---------- -- ----- ---- --- ---------- -- ---------- ----             
+E01  A           20 M  CSE   D05  G           40 M  Father     E01              
+E02  B           25 F  CSE   D05  G           40 M  Father     E01              
+E03  C           30 F  IT    D05  G           40 M  Father     E01              
+E04  D           50 M  IT    D05  G           40 M  Father     E01              
+E05  E           40 F  MGM   D05  G           40 M  Father     E01              
+E01  A           20 M  CSE   D06  H           12 M  Brother    E02              
+E02  B           25 F  CSE   D06  H           12 M  Brother    E02              
+E03  C           30 F  IT    D06  H           12 M  Brother    E02              
+E04  D           50 M  IT    D06  H           12 M  Brother    E02              
+E05  E           40 F  MGM   D06  H           12 M  Brother    E02              
+E01  A           20 M  CSE   D08  J           50 F  Mother     E04              
+
+EMP_ EMP        AGE GE DEPT  DEP_ DEP        AGE D_ RELATION   EID              
+---- --- ---------- -- ----- ---- --- ---------- -- ---------- ----             
+E02  B           25 F  CSE   D08  J           50 F  Mother     E04              
+E03  C           30 F  IT    D08  J           50 F  Mother     E04              
+E04  D           50 M  IT    D08  J           50 F  Mother     E04              
+E05  E           40 F  MGM   D08  J           50 F  Mother     E04              
+E01  A           20 M  CSE   D07  I           10 F  Sister     E03              
+E02  B           25 F  CSE   D07  I           10 F  Sister     E03              
+E03  C           30 F  IT    D07  I           10 F  Sister     E03              
+E04  D           50 M  IT    D07  I           10 F  Sister     E03              
+E05  E           40 F  MGM   D07  I           10 F  Sister     E03              
+E01  A           20 M  CSE   D09  K           10 M  Son        E05              
+E02  B           25 F  CSE   D09  K           10 M  Son        E05              
+
+EMP_ EMP        AGE GE DEPT  DEP_ DEP        AGE D_ RELATION   EID              
+---- --- ---------- -- ----- ---- --- ---------- -- ---------- ----             
+E03  C           30 F  IT    D09  K           10 M  Son        E05              
+E04  D           50 M  IT    D09  K           10 M  Son        E05              
+E05  E           40 F  MGM   D09  K           10 M  Son        E05              
+
+25 rows selected.
+
+SQL> select * from EMPLOYEE_ST e inner join DEPENDENT d on d.eid=e.emp_id where e.gender='F';
+
+EMP_ EMP        AGE GE DEPT  DEP_ DEP        AGE D_ RELATION   EID              
+---- --- ---------- -- ----- ---- --- ---------- -- ---------- ----             
+E02  B           25 F  CSE   D06  H           12 M  Brother    E02              
+E03  C           30 F  IT    D07  I           10 F  Sister     E03              
+E05  E           40 F  MGM   D09  K           10 M  Son        E05              
+
+SQL> select * from EMPLOYEE_ST e inner join DEPENDENT d on d.eid=e.emp_id where e.DEPENDENT='CSE';
+select * from EMPLOYEE_ST e inner join DEPENDENT d on d.eid=e.emp_id where e.DEPENDENT='CSE'
+                                                                           *
+ERROR at line 1:
+ORA-00904: "E"."DEPENDENT": invalid identifier 
+
+
+SQL> select * from EMPLOYEE_ST e inner join DEPENDENT d on d.eid=e.emp_id where e.dept='CSE';
+
+EMP_ EMP        AGE GE DEPT  DEP_ DEP        AGE D_ RELATION   EID              
+---- --- ---------- -- ----- ---- --- ---------- -- ---------- ----             
+E01  A           20 M  CSE   D05  G           40 M  Father     E01              
+E02  B           25 F  CSE   D06  H           12 M  Brother    E02              
+
+SQL> select eid from assigned_to where p_id='P01';
+
+EID                                                                             
+----                                                                            
+E01                                                                             
+E02                                                                             
+E03                                                                             
+
+SQL> select * from emp natural join assigned_to where (emp_id=eid and p_id='P02');
+select * from emp natural join assigned_to where (emp_id=eid and p_id='P02')
+                                                         *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> select * from EMPLOYEE_ST natural join assigned_to where (emp_id=eid and p_id='P02');
+
+EMP_ EMP        AGE GE DEPT  EID  P_ID                                          
+---- --- ---------- -- ----- ---- ----                                          
+E01  A           20 M  CSE   E01  P02                                           
+E03  C           30 F  IT    E03  P02                                           
+E04  D           50 M  IT    E04  P02                                           
+E05  E           40 F  MGM   E05  P02                                           
+
+SQL> select emp_id,emp_name from EMPLOYEE_ST natural join assigned_to where(emp_id=eid and p_id='P02') intersect select emp_id,emp_name from EMPLOYEE_ST natural join assigned_to where(emp_id=eid and p_id='P04');
+
+EMP_ EMP                                                                        
+---- ---                                                                        
+E01  A                                                                          
+E05  E                                                                          
+
+SQL> select emp_id,emp_name from EMPLOYEE_ST natural join assigned_to natural join PROJECT where(emp_id=eid and p_name='Database') union select emp_id,emp_name from EMPLOYEE_ST natural join assigned_to natural join PROJECT where(emp_id=eid and p_name='Networking');
+
+EMP_ EMP                                                                        
+---- ---                                                                        
+E01  A                                                                          
+E02  B                                                                          
+E03  C                                                                          
+E04  D                                                                          
+E05  E                                                                          
+
+SQL> select emp_id,emp_name from EMPLOYEE_ST natural join assigned_to where(emp_id=eid) minus select emp_id,emp_name from EMPLOYEE_ST natural join assigned_to where(emp_id=eid and p_id='P05');
+
+EMP_ EMP                                                                        
+---- ---                                                                        
+E01  A                                                                          
+E05  E                                                                          
+
+SQL> spool off;

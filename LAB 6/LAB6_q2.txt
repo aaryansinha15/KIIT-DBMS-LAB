@@ -1,0 +1,422 @@
+SQL> create table book(bid varchar2(3) primary key,b_title varchar2(10) not null,b_author varchar2(20) not null,b_yop number(5),b_publisher varchar2(10) not null);
+
+Table created.
+
+SQL>  insert into book(bid,b_title,b_author,b_yop,b_publisher)values('B01','DBMS','Navathe',2017,'Pearson');
+
+1 row created.
+
+SQL>  insert into book(bid,b_title,b_author,b_yop,b_publisher)values('B02','SE','Rajib Mall',2015,'EEE');
+
+1 row created.
+
+SQL>  insert into book(bid,b_title,b_author,b_yop,b_publisher)values('B03','C Prog.','Y Kantekar',2009,'TMH');
+
+1 row created.
+
+SQL> insert into book(bid,b_title,b_author,b_yop,b_publisher)values('B04','OS','Galvin',2015,'TMH');
+
+1 row created.
+
+SQL>  insert into book(bid,b_title,b_author,b_yop,b_publisher)values('B05','DSA','Forouzan',2017,'Pearson');
+
+1 row created.
+
+SQL> create table article(aid varchar2(3) primary key,a_title varchar2(10) not null,a_author varchar2(20) not null,a_yop number(5),a_publisher varchar2(10) not null);
+
+Table created.
+
+SQL> select * from book;
+
+BID B_TITLE    B_AUTHOR                  B_YOP B_PUBLISHE                       
+--- ---------- -------------------- ---------- ----------                       
+B01 DBMS       Navathe                    2017 Pearson                          
+B02 SE         Rajib Mall                 2015 EEE                              
+B03 C Prog.    Y Kantekar                 2009 TMH                              
+B04 OS         Galvin                     2015 TMH                              
+B05 DSA        Forouzan                   2017 Pearson                          
+
+SQL>  insert into article(aid,a_title,a_author,a_yop,a_publisher)values('A01','Testing','Rajib Mall',2017,'Springer');
+
+1 row created.
+
+SQL>  insert into article(aid,a_title,a_author,a_yop,a_publisher)values('A02','Pointers','Balagurusamy',2012,'IEEE');
+
+1 row created.
+
+SQL> insert into article(aid,a_title,a_author,a_yop,a_publisher)values('A03','BST','Amiya Rath',2015,'Elsevier');
+
+1 row created.
+
+SQL> insert into article(aid,a_title,a_author,a_yop,a_publisher)values('A04','ML','Ajay Jena',2018,'IEEE');
+
+1 row created.
+
+SQL>  insert into article(aid,a_title,a_author,a_yop,a_publisher)values('A05','TCP','Rajib Mall',2017,'Springer');
+
+1 row created.
+
+SQL> select * from article;
+
+AID A_TITLE    A_AUTHOR                  A_YOP A_PUBLISHE                       
+--- ---------- -------------------- ---------- ----------                       
+A01 Testing    Rajib Mall                 2017 Springer                         
+A02 Pointers   Balagurusamy               2012 IEEE                             
+A03 BST        Amiya Rath                 2015 Elsevier                         
+A04 ML         Ajay Jena                  2018 IEEE                             
+A05 TCP        Rajib Mall                 2017 Springer                         
+
+SQL> select author from book union select author from article;
+select author from book union select author from article
+       *
+ERROR at line 1:
+ORA-00904: "AUTHOR": invalid identifier 
+
+
+SQL> select b_author from book union select a_author from article;
+
+B_AUTHOR                                                                        
+--------------------                                                            
+Ajay Jena                                                                       
+Amiya Rath                                                                      
+Balagurusamy                                                                    
+Forouzan                                                                        
+Galvin                                                                          
+Navathe                                                                         
+Rajib Mall                                                                      
+Y Kantekar                                                                      
+
+8 rows selected.
+
+SQL> select b_author from book intersect a_author from article;
+select b_author from book intersect a_author from article
+                                    *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword 
+
+
+SQL> select b_author from book intersect select a_author from article;
+
+B_AUTHOR                                                                        
+--------------------                                                            
+Rajib Mall                                                                      
+
+SQL> select b_author from book minus select a_author from article;
+
+B_AUTHOR                                                                        
+--------------------                                                            
+Forouzan                                                                        
+Galvin                                                                          
+Navathe                                                                         
+Y Kantekar                                                                      
+
+SQL> select a_author from article minus b_author from book;
+select a_author from article minus b_author from book
+                                   *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword 
+
+
+SQL> select a_author from article minus select b_author from book;
+
+A_AUTHOR                                                                        
+--------------------                                                            
+Ajay Jena                                                                       
+Amiya Rath                                                                      
+Balagurusamy                                                                    
+
+SQL> select * from book cross join article;
+
+BID B_TITLE    B_AUTHOR                  B_YOP B_PUBLISHE AID A_TITLE           
+--- ---------- -------------------- ---------- ---------- --- ----------        
+A_AUTHOR                  A_YOP A_PUBLISHE                                      
+-------------------- ---------- ----------                                      
+B01 DBMS       Navathe                    2017 Pearson    A01 Testing           
+Rajib Mall                 2017 Springer                                        
+                                                                                
+B01 DBMS       Navathe                    2017 Pearson    A02 Pointers          
+Balagurusamy               2012 IEEE                                            
+                                                                                
+B01 DBMS       Navathe                    2017 Pearson    A03 BST               
+Amiya Rath                 2015 Elsevier                                        
+                                                                                
+
+BID B_TITLE    B_AUTHOR                  B_YOP B_PUBLISHE AID A_TITLE           
+--- ---------- -------------------- ---------- ---------- --- ----------        
+A_AUTHOR                  A_YOP A_PUBLISHE                                      
+-------------------- ---------- ----------                                      
+B01 DBMS       Navathe                    2017 Pearson    A04 ML                
+Ajay Jena                  2018 IEEE                                            
+                                                                                
+B01 DBMS       Navathe                    2017 Pearson    A05 TCP               
+Rajib Mall                 2017 Springer                                        
+                                                                                
+B02 SE         Rajib Mall                 2015 EEE        A01 Testing           
+Rajib Mall                 2017 Springer                                        
+                                                                                
+
+BID B_TITLE    B_AUTHOR                  B_YOP B_PUBLISHE AID A_TITLE           
+--- ---------- -------------------- ---------- ---------- --- ----------        
+A_AUTHOR                  A_YOP A_PUBLISHE                                      
+-------------------- ---------- ----------                                      
+B02 SE         Rajib Mall                 2015 EEE        A02 Pointers          
+Balagurusamy               2012 IEEE                                            
+                                                                                
+B02 SE         Rajib Mall                 2015 EEE        A03 BST               
+Amiya Rath                 2015 Elsevier                                        
+                                                                                
+B02 SE         Rajib Mall                 2015 EEE        A04 ML                
+Ajay Jena                  2018 IEEE                                            
+                                                                                
+
+BID B_TITLE    B_AUTHOR                  B_YOP B_PUBLISHE AID A_TITLE           
+--- ---------- -------------------- ---------- ---------- --- ----------        
+A_AUTHOR                  A_YOP A_PUBLISHE                                      
+-------------------- ---------- ----------                                      
+B02 SE         Rajib Mall                 2015 EEE        A05 TCP               
+Rajib Mall                 2017 Springer                                        
+                                                                                
+B03 C Prog.    Y Kantekar                 2009 TMH        A01 Testing           
+Rajib Mall                 2017 Springer                                        
+                                                                                
+B03 C Prog.    Y Kantekar                 2009 TMH        A02 Pointers          
+Balagurusamy               2012 IEEE                                            
+                                                                                
+
+BID B_TITLE    B_AUTHOR                  B_YOP B_PUBLISHE AID A_TITLE           
+--- ---------- -------------------- ---------- ---------- --- ----------        
+A_AUTHOR                  A_YOP A_PUBLISHE                                      
+-------------------- ---------- ----------                                      
+B03 C Prog.    Y Kantekar                 2009 TMH        A03 BST               
+Amiya Rath                 2015 Elsevier                                        
+                                                                                
+B03 C Prog.    Y Kantekar                 2009 TMH        A04 ML                
+Ajay Jena                  2018 IEEE                                            
+                                                                                
+B03 C Prog.    Y Kantekar                 2009 TMH        A05 TCP               
+Rajib Mall                 2017 Springer                                        
+                                                                                
+
+BID B_TITLE    B_AUTHOR                  B_YOP B_PUBLISHE AID A_TITLE           
+--- ---------- -------------------- ---------- ---------- --- ----------        
+A_AUTHOR                  A_YOP A_PUBLISHE                                      
+-------------------- ---------- ----------                                      
+B04 OS         Galvin                     2015 TMH        A01 Testing           
+Rajib Mall                 2017 Springer                                        
+                                                                                
+B04 OS         Galvin                     2015 TMH        A02 Pointers          
+Balagurusamy               2012 IEEE                                            
+                                                                                
+B04 OS         Galvin                     2015 TMH        A03 BST               
+Amiya Rath                 2015 Elsevier                                        
+                                                                                
+
+BID B_TITLE    B_AUTHOR                  B_YOP B_PUBLISHE AID A_TITLE           
+--- ---------- -------------------- ---------- ---------- --- ----------        
+A_AUTHOR                  A_YOP A_PUBLISHE                                      
+-------------------- ---------- ----------                                      
+B04 OS         Galvin                     2015 TMH        A04 ML                
+Ajay Jena                  2018 IEEE                                            
+                                                                                
+B04 OS         Galvin                     2015 TMH        A05 TCP               
+Rajib Mall                 2017 Springer                                        
+                                                                                
+B05 DSA        Forouzan                   2017 Pearson    A01 Testing           
+Rajib Mall                 2017 Springer                                        
+                                                                                
+
+BID B_TITLE    B_AUTHOR                  B_YOP B_PUBLISHE AID A_TITLE           
+--- ---------- -------------------- ---------- ---------- --- ----------        
+A_AUTHOR                  A_YOP A_PUBLISHE                                      
+-------------------- ---------- ----------                                      
+B05 DSA        Forouzan                   2017 Pearson    A02 Pointers          
+Balagurusamy               2012 IEEE                                            
+                                                                                
+B05 DSA        Forouzan                   2017 Pearson    A03 BST               
+Amiya Rath                 2015 Elsevier                                        
+                                                                                
+B05 DSA        Forouzan                   2017 Pearson    A04 ML                
+Ajay Jena                  2018 IEEE                                            
+                                                                                
+
+BID B_TITLE    B_AUTHOR                  B_YOP B_PUBLISHE AID A_TITLE           
+--- ---------- -------------------- ---------- ---------- --- ----------        
+A_AUTHOR                  A_YOP A_PUBLISHE                                      
+-------------------- ---------- ----------                                      
+B05 DSA        Forouzan                   2017 Pearson    A05 TCP               
+Rajib Mall                 2017 Springer                                        
+                                                                                
+
+25 rows selected.
+
+SQL> set lineszie 100;
+SP2-0158: unknown SET option "lineszie"
+SQL> set linesize 100;
+SQL> select * from book cross join article;
+
+BID B_TITLE    B_AUTHOR                  B_YOP B_PUBLISHE AID A_TITLE    A_AUTHOR                   
+--- ---------- -------------------- ---------- ---------- --- ---------- --------------------       
+     A_YOP A_PUBLISHE                                                                               
+---------- ----------                                                                               
+B01 DBMS       Navathe                    2017 Pearson    A01 Testing    Rajib Mall                 
+      2017 Springer                                                                                 
+                                                                                                    
+B01 DBMS       Navathe                    2017 Pearson    A02 Pointers   Balagurusamy               
+      2012 IEEE                                                                                     
+                                                                                                    
+B01 DBMS       Navathe                    2017 Pearson    A03 BST        Amiya Rath                 
+      2015 Elsevier                                                                                 
+                                                                                                    
+
+BID B_TITLE    B_AUTHOR                  B_YOP B_PUBLISHE AID A_TITLE    A_AUTHOR                   
+--- ---------- -------------------- ---------- ---------- --- ---------- --------------------       
+     A_YOP A_PUBLISHE                                                                               
+---------- ----------                                                                               
+B01 DBMS       Navathe                    2017 Pearson    A04 ML         Ajay Jena                  
+      2018 IEEE                                                                                     
+                                                                                                    
+B01 DBMS       Navathe                    2017 Pearson    A05 TCP        Rajib Mall                 
+      2017 Springer                                                                                 
+                                                                                                    
+B02 SE         Rajib Mall                 2015 EEE        A01 Testing    Rajib Mall                 
+      2017 Springer                                                                                 
+                                                                                                    
+
+BID B_TITLE    B_AUTHOR                  B_YOP B_PUBLISHE AID A_TITLE    A_AUTHOR                   
+--- ---------- -------------------- ---------- ---------- --- ---------- --------------------       
+     A_YOP A_PUBLISHE                                                                               
+---------- ----------                                                                               
+B02 SE         Rajib Mall                 2015 EEE        A02 Pointers   Balagurusamy               
+      2012 IEEE                                                                                     
+                                                                                                    
+B02 SE         Rajib Mall                 2015 EEE        A03 BST        Amiya Rath                 
+      2015 Elsevier                                                                                 
+                                                                                                    
+B02 SE         Rajib Mall                 2015 EEE        A04 ML         Ajay Jena                  
+      2018 IEEE                                                                                     
+                                                                                                    
+
+BID B_TITLE    B_AUTHOR                  B_YOP B_PUBLISHE AID A_TITLE    A_AUTHOR                   
+--- ---------- -------------------- ---------- ---------- --- ---------- --------------------       
+     A_YOP A_PUBLISHE                                                                               
+---------- ----------                                                                               
+B02 SE         Rajib Mall                 2015 EEE        A05 TCP        Rajib Mall                 
+      2017 Springer                                                                                 
+                                                                                                    
+B03 C Prog.    Y Kantekar                 2009 TMH        A01 Testing    Rajib Mall                 
+      2017 Springer                                                                                 
+                                                                                                    
+B03 C Prog.    Y Kantekar                 2009 TMH        A02 Pointers   Balagurusamy               
+      2012 IEEE                                                                                     
+                                                                                                    
+
+BID B_TITLE    B_AUTHOR                  B_YOP B_PUBLISHE AID A_TITLE    A_AUTHOR                   
+--- ---------- -------------------- ---------- ---------- --- ---------- --------------------       
+     A_YOP A_PUBLISHE                                                                               
+---------- ----------                                                                               
+B03 C Prog.    Y Kantekar                 2009 TMH        A03 BST        Amiya Rath                 
+      2015 Elsevier                                                                                 
+                                                                                                    
+B03 C Prog.    Y Kantekar                 2009 TMH        A04 ML         Ajay Jena                  
+      2018 IEEE                                                                                     
+                                                                                                    
+B03 C Prog.    Y Kantekar                 2009 TMH        A05 TCP        Rajib Mall                 
+      2017 Springer                                                                                 
+                                                                                                    
+
+BID B_TITLE    B_AUTHOR                  B_YOP B_PUBLISHE AID A_TITLE    A_AUTHOR                   
+--- ---------- -------------------- ---------- ---------- --- ---------- --------------------       
+     A_YOP A_PUBLISHE                                                                               
+---------- ----------                                                                               
+B04 OS         Galvin                     2015 TMH        A01 Testing    Rajib Mall                 
+      2017 Springer                                                                                 
+                                                                                                    
+B04 OS         Galvin                     2015 TMH        A02 Pointers   Balagurusamy               
+      2012 IEEE                                                                                     
+                                                                                                    
+B04 OS         Galvin                     2015 TMH        A03 BST        Amiya Rath                 
+      2015 Elsevier                                                                                 
+                                                                                                    
+
+BID B_TITLE    B_AUTHOR                  B_YOP B_PUBLISHE AID A_TITLE    A_AUTHOR                   
+--- ---------- -------------------- ---------- ---------- --- ---------- --------------------       
+     A_YOP A_PUBLISHE                                                                               
+---------- ----------                                                                               
+B04 OS         Galvin                     2015 TMH        A04 ML         Ajay Jena                  
+      2018 IEEE                                                                                     
+                                                                                                    
+B04 OS         Galvin                     2015 TMH        A05 TCP        Rajib Mall                 
+      2017 Springer                                                                                 
+                                                                                                    
+B05 DSA        Forouzan                   2017 Pearson    A01 Testing    Rajib Mall                 
+      2017 Springer                                                                                 
+                                                                                                    
+
+BID B_TITLE    B_AUTHOR                  B_YOP B_PUBLISHE AID A_TITLE    A_AUTHOR                   
+--- ---------- -------------------- ---------- ---------- --- ---------- --------------------       
+     A_YOP A_PUBLISHE                                                                               
+---------- ----------                                                                               
+B05 DSA        Forouzan                   2017 Pearson    A02 Pointers   Balagurusamy               
+      2012 IEEE                                                                                     
+                                                                                                    
+B05 DSA        Forouzan                   2017 Pearson    A03 BST        Amiya Rath                 
+      2015 Elsevier                                                                                 
+                                                                                                    
+B05 DSA        Forouzan                   2017 Pearson    A04 ML         Ajay Jena                  
+      2018 IEEE                                                                                     
+                                                                                                    
+
+BID B_TITLE    B_AUTHOR                  B_YOP B_PUBLISHE AID A_TITLE    A_AUTHOR                   
+--- ---------- -------------------- ---------- ---------- --- ---------- --------------------       
+     A_YOP A_PUBLISHE                                                                               
+---------- ----------                                                                               
+B05 DSA        Forouzan                   2017 Pearson    A05 TCP        Rajib Mall                 
+      2017 Springer                                                                                 
+                                                                                                    
+
+25 rows selected.
+
+SQL> set linesize 300;
+SQL> select * from book cross join article;
+
+BID B_TITLE    B_AUTHOR                  B_YOP B_PUBLISHE AID A_TITLE    A_AUTHOR                  A_YOP A_PUBLISHE                                                                                                                                                                                         
+--- ---------- -------------------- ---------- ---------- --- ---------- -------------------- ---------- ----------                                                                                                                                                                                         
+B01 DBMS       Navathe                    2017 Pearson    A01 Testing    Rajib Mall                 2017 Springer                                                                                                                                                                                           
+B01 DBMS       Navathe                    2017 Pearson    A02 Pointers   Balagurusamy               2012 IEEE                                                                                                                                                                                               
+B01 DBMS       Navathe                    2017 Pearson    A03 BST        Amiya Rath                 2015 Elsevier                                                                                                                                                                                           
+B01 DBMS       Navathe                    2017 Pearson    A04 ML         Ajay Jena                  2018 IEEE                                                                                                                                                                                               
+B01 DBMS       Navathe                    2017 Pearson    A05 TCP        Rajib Mall                 2017 Springer                                                                                                                                                                                           
+B02 SE         Rajib Mall                 2015 EEE        A01 Testing    Rajib Mall                 2017 Springer                                                                                                                                                                                           
+B02 SE         Rajib Mall                 2015 EEE        A02 Pointers   Balagurusamy               2012 IEEE                                                                                                                                                                                               
+B02 SE         Rajib Mall                 2015 EEE        A03 BST        Amiya Rath                 2015 Elsevier                                                                                                                                                                                           
+B02 SE         Rajib Mall                 2015 EEE        A04 ML         Ajay Jena                  2018 IEEE                                                                                                                                                                                               
+B02 SE         Rajib Mall                 2015 EEE        A05 TCP        Rajib Mall                 2017 Springer                                                                                                                                                                                           
+B03 C Prog.    Y Kantekar                 2009 TMH        A01 Testing    Rajib Mall                 2017 Springer                                                                                                                                                                                           
+
+BID B_TITLE    B_AUTHOR                  B_YOP B_PUBLISHE AID A_TITLE    A_AUTHOR                  A_YOP A_PUBLISHE                                                                                                                                                                                         
+--- ---------- -------------------- ---------- ---------- --- ---------- -------------------- ---------- ----------                                                                                                                                                                                         
+B03 C Prog.    Y Kantekar                 2009 TMH        A02 Pointers   Balagurusamy               2012 IEEE                                                                                                                                                                                               
+B03 C Prog.    Y Kantekar                 2009 TMH        A03 BST        Amiya Rath                 2015 Elsevier                                                                                                                                                                                           
+B03 C Prog.    Y Kantekar                 2009 TMH        A04 ML         Ajay Jena                  2018 IEEE                                                                                                                                                                                               
+B03 C Prog.    Y Kantekar                 2009 TMH        A05 TCP        Rajib Mall                 2017 Springer                                                                                                                                                                                           
+B04 OS         Galvin                     2015 TMH        A01 Testing    Rajib Mall                 2017 Springer                                                                                                                                                                                           
+B04 OS         Galvin                     2015 TMH        A02 Pointers   Balagurusamy               2012 IEEE                                                                                                                                                                                               
+B04 OS         Galvin                     2015 TMH        A03 BST        Amiya Rath                 2015 Elsevier                                                                                                                                                                                           
+B04 OS         Galvin                     2015 TMH        A04 ML         Ajay Jena                  2018 IEEE                                                                                                                                                                                               
+B04 OS         Galvin                     2015 TMH        A05 TCP        Rajib Mall                 2017 Springer                                                                                                                                                                                           
+B05 DSA        Forouzan                   2017 Pearson    A01 Testing    Rajib Mall                 2017 Springer                                                                                                                                                                                           
+B05 DSA        Forouzan                   2017 Pearson    A02 Pointers   Balagurusamy               2012 IEEE                                                                                                                                                                                               
+
+BID B_TITLE    B_AUTHOR                  B_YOP B_PUBLISHE AID A_TITLE    A_AUTHOR                  A_YOP A_PUBLISHE                                                                                                                                                                                         
+--- ---------- -------------------- ---------- ---------- --- ---------- -------------------- ---------- ----------                                                                                                                                                                                         
+B05 DSA        Forouzan                   2017 Pearson    A03 BST        Amiya Rath                 2015 Elsevier                                                                                                                                                                                           
+B05 DSA        Forouzan                   2017 Pearson    A04 ML         Ajay Jena                  2018 IEEE                                                                                                                                                                                               
+B05 DSA        Forouzan                   2017 Pearson    A05 TCP        Rajib Mall                 2017 Springer                                                                                                                                                                                           
+
+25 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> spool off;

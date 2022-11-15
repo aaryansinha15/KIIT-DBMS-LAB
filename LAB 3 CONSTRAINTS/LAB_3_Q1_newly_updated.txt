@@ -1,0 +1,293 @@
+SQL>  create table ITEM_MASTER(Item_no varchar2(4) primary key, Name varchar2(10) unique, QTY_AVL number(10) default 100, CATEGORY char(2) check(category in('A','B','C')),UNIT_MEASURE char(3),RDR_LVL number(4) not null ,RDR_QTY number(6) not null ,RATE number(6) not null);
+
+Table created.
+
+SQL>  describe ITEM_MASTER;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ITEM_NO                                   NOT NULL VARCHAR2(4)
+ NAME                                               VARCHAR2(10)
+ QTY_AVL                                            NUMBER(10)
+ CATEGORY                                           CHAR(2)
+ UNIT_MEASURE                                       CHAR(3)
+ RDR_LVL                                   NOT NULL NUMBER(4)
+ RDR_QTY                                   NOT NULL NUMBER(6)
+ RATE                                      NOT NULL NUMBER(6)
+
+SQL> 
+SQL> INSERT INTO ITEM_MASTER(ITEM_NO,NAME,QTY_AVL,CATEGORY,UNIT_MEASURE,RDR_LVL,RDR_QTY,RATE)VALUES('I01','MOBILE',5000,'A','pcs',500,2000,8999);
+
+1 row created.
+
+SQL> select *from ITEM_MASTER;
+
+ITEM NAME          QTY_AVL CA UNI    RDR_LVL    RDR_QTY       RATE              
+---- ---------- ---------- -- --- ---------- ---------- ----------              
+I01  MOBILE           5000 A  pcs        500       2000       8999              
+
+SQL> INSERT INTO ITEM_MASTER(ITEM_NO,NAME,QTY_AVL,CATEGORY,UNIT_MEASURE,RDR_LVL,RDR_QTY,RATE)VALUES('I02','HEADPHONE',1000,'A','pcs',300,1000,999);
+
+1 row created.
+
+SQL> INSERT INTO ITEM_MASTER(ITEM_NO,NAME,QTY_AVL,CATEGORY,UNIT_MEASURE,RDR_LVL,RDR_QTY,RATE)VALUES('I03','Charger',700,'A','pcs',400,1000,399);
+
+1 row created.
+
+SQL>  INSERT INTO ITEM_MASTER(ITEM_NO,NAME,QTY_AVL,CATEGORY,UNIT_MEASURE,RDR_LVL,RDR_QTY,RATE)VALUES('I04','Monitor',1000,'B','pcs',100,2000,10000);
+
+1 row created.
+
+SQL> select *from ITEM_MASTER;
+
+ITEM NAME          QTY_AVL CA UNI    RDR_LVL    RDR_QTY       RATE              
+---- ---------- ---------- -- --- ---------- ---------- ----------              
+I01  MOBILE           5000 A  pcs        500       2000       8999              
+I02  HEADPHONE        1000 A  pcs        300       1000        999              
+I03  Charger           700 A  pcs        400       1000        399              
+I04  Monitor          1000 B  pcs        100       2000      10000              
+
+SQL>  INSERT INTO ITEM_MASTER(ITEM_NO,NAME,CATEGORY,UNIT_MEASURE,RDR_LVL,RDR_QTY,RATE)VALUES('I05','Mouse','B','pcs',100,200,500);
+
+1 row created.
+
+SQL> select * from ITEM_MASTER;
+
+ITEM NAME          QTY_AVL CA UNI    RDR_LVL    RDR_QTY       RATE              
+---- ---------- ---------- -- --- ---------- ---------- ----------              
+I01  MOBILE           5000 A  pcs        500       2000       8999              
+I02  HEADPHONE        1000 A  pcs        300       1000        999              
+I03  Charger           700 A  pcs        400       1000        399              
+I04  Monitor          1000 B  pcs        100       2000      10000              
+I05  Mouse             100 B  pcs        100        200        500              
+
+SQL> INSERT INTO ITEM_MASTER(ITEM_NO,NAME,CATEGORY,UNIT_MEASURE,RDR_LVL,RDR_QTY,RATE)VALUES('I06','Keyboard','B','pcs',50,200,800);
+
+1 row created.
+
+SQL>  select * from ITEM_MASTER;
+
+ITEM NAME          QTY_AVL CA UNI    RDR_LVL    RDR_QTY       RATE              
+---- ---------- ---------- -- --- ---------- ---------- ----------              
+I01  MOBILE           5000 A  pcs        500       2000       8999              
+I02  HEADPHONE        1000 A  pcs        300       1000        999              
+I03  Charger           700 A  pcs        400       1000        399              
+I04  Monitor          1000 B  pcs        100       2000      10000              
+I05  Mouse             100 B  pcs        100        200        500              
+I06  Keyboard          100 B  pcs         50        200        800              
+
+6 rows selected.
+
+SQL> INSERT INTO ITEM_MASTER(ITEM_NO,NAME,CATEGORY,UNIT_MEASURE,RDR_LVL,RDR_QTY,RATE)VALUES('I07','HDD','B','pcs',100,500,3000);
+
+1 row created.
+
+SQL> INSERT INTO ITEM_MASTER(ITEM_NO,NAME,CATEGORY,UNIT_MEASURE,RDR_LVL,RDR_QTY,RATE)VALUES('I08','Fridge','C','pcs',100,500,15000);
+
+1 row created.
+
+SQL> INSERT INTO ITEM_MASTER(ITEM_NO,NAME,QTY_AVL,CATEGORY,UNIT_MEASURE,RDR_LVL,RDR_QTY,RATE)VALUES('I09','TV Set',1000,'C','pcs',500,5000,30000);
+
+1 row created.
+
+SQL>  INSERT INTO ITEM_MASTER(ITEM_NO,NAME,QTY_AVL,CATEGORY,UNIT_MEASURE,RDR_LVL,RDR_QTY,RATE)VALUES('I10','AC',1000,'C','pcs',500,3000,40000);
+
+1 row created.
+
+SQL>  select * from ITEM_MASTER;
+
+ITEM NAME          QTY_AVL CA UNI    RDR_LVL    RDR_QTY       RATE              
+---- ---------- ---------- -- --- ---------- ---------- ----------              
+I01  MOBILE           5000 A  pcs        500       2000       8999              
+I02  HEADPHONE        1000 A  pcs        300       1000        999              
+I03  Charger           700 A  pcs        400       1000        399              
+I04  Monitor          1000 B  pcs        100       2000      10000              
+I05  Mouse             100 B  pcs        100        200        500              
+I06  Keyboard          100 B  pcs         50        200        800              
+I07  HDD               100 B  pcs        100        500       3000              
+I08  Fridge            100 C  pcs        100        500      15000              
+I09  TV Set           1000 C  pcs        500       5000      30000              
+I10  AC               1000 C  pcs        500       3000      40000              
+
+10 rows selected.
+
+SQL>  select ITEM_No,NAME,RATE from ITEM_MASTER;
+
+ITEM NAME             RATE                                                      
+---- ---------- ----------                                                      
+I01  MOBILE           8999                                                      
+I02  HEADPHONE         999                                                      
+I03  Charger           399                                                      
+I04  Monitor         10000                                                      
+I05  Mouse             500                                                      
+I06  Keyboard          800                                                      
+I07  HDD              3000                                                      
+I08  Fridge          15000                                                      
+I09  TV Set          30000                                                      
+I10  AC              40000                                                      
+
+10 rows selected.
+
+SQL>  select * from ITEM_MASTER where CATEGORY ='A' AND RATE<=1000;
+
+ITEM NAME          QTY_AVL CA UNI    RDR_LVL    RDR_QTY       RATE              
+---- ---------- ---------- -- --- ---------- ---------- ----------              
+I02  HEADPHONE        1000 A  pcs        300       1000        999              
+I03  Charger           700 A  pcs        400       1000        399              
+
+SQL> 
+SQL> select * from ITEM_MASTER where CATEGORY='B' order by QTY_AVL DESC;
+
+ITEM NAME          QTY_AVL CA UNI    RDR_LVL    RDR_QTY       RATE              
+---- ---------- ---------- -- --- ---------- ---------- ----------              
+I04  Monitor          1000 B  pcs        100       2000      10000              
+I06  Keyboard          100 B  pcs         50        200        800              
+I07  HDD               100 B  pcs        100        500       3000              
+I05  Mouse             100 B  pcs        100        200        500              
+
+SQL> select * from ITEM_MASTER where name like 'M%' order by RDR_LVL DESC;
+
+ITEM NAME          QTY_AVL CA UNI    RDR_LVL    RDR_QTY       RATE              
+---- ---------- ---------- -- --- ---------- ---------- ----------              
+I01  MOBILE           5000 A  pcs        500       2000       8999              
+I05  Mouse             100 B  pcs        100        200        500              
+I04  Monitor          1000 B  pcs        100       2000      10000              
+
+SQL> select * from ITEM_MASTER order by name ASC;
+
+ITEM NAME          QTY_AVL CA UNI    RDR_LVL    RDR_QTY       RATE              
+---- ---------- ---------- -- --- ---------- ---------- ----------              
+I10  AC               1000 C  pcs        500       3000      40000              
+I03  Charger           700 A  pcs        400       1000        399              
+I08  Fridge            100 C  pcs        100        500      15000              
+I07  HDD               100 B  pcs        100        500       3000              
+I02  HEADPHONE        1000 A  pcs        300       1000        999              
+I06  Keyboard          100 B  pcs         50        200        800              
+I01  MOBILE           5000 A  pcs        500       2000       8999              
+I04  Monitor          1000 B  pcs        100       2000      10000              
+I05  Mouse             100 B  pcs        100        200        500              
+I09  TV Set           1000 C  pcs        500       5000      30000              
+
+10 rows selected.
+
+SQL> create table ITEM_TRANS(It_no varchar2(4) references ITEM_MASTER(ITEM_No),Trans_date date,qty number(5));
+
+Table created.
+
+SQL> describe ITEM_TRANS;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ IT_NO                                              VARCHAR2(4)
+ TRANS_DATE                                         DATE
+ QTY                                                NUMBER(5)
+
+SQL>  insert into ITEM_TRANS(IT_no,Trans_date,qty)values('I02','12-Dec-2019',1098);
+
+1 row created.
+
+SQL> select * from ITEM_TRANS;
+
+IT_N TRANS_DAT        QTY                                                       
+---- --------- ----------                                                       
+I02  12-DEC-19       1098                                                       
+
+SQL> insert into ITEM_TRANS(IT_no,Trans_date,qty)values('I02','07-APR-2020',2499);
+
+1 row created.
+
+SQL>  insert into ITEM_TRANS(IT_no,Trans_date,qty)values('I04','24-MAY-2021',3942);
+
+1 row created.                                                     
+
+SQL> insert into ITEM_TRANS(IT_no,Trans_date,qty)values('I08','27-Jan-2022',2344);
+
+1 row created.
+
+SQL> select * from ITEM_TRANS;
+
+IT_N TRANS_DAT        QTY                                                       
+---- --------- ----------                                                       
+I02  12-DEC-19       1098                                                       
+I02  07-APR-20       2499                                                       
+I04  24-MAY-21       3942                                                       
+I08  27-JAN-22       2344                                                       
+
+
+SQL> insert into ITEM_TRANS(IT_no,Trans_date,qty)values('I14','09-JUL-2020',4821);
+insert into ITEM_TRANS(IT_no,Trans_date,qty)values('I14','09-JUL-2020',4821)
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (DB1796.SYS_C007683) violated - parent key not 
+found 
+
+
+SQL>  select *from ITEM_MASTER;
+
+ITEM NAME          QTY_AVL CA UNI    RDR_LVL    RDR_QTY       RATE              
+---- ---------- ---------- -- --- ---------- ---------- ----------              
+I01  MOBILE           5000 A  pcs        500       2000       8999              
+I02  HEADPHONE        1000 A  pcs        300       1000        999              
+I03  Charger           700 A  pcs        400       1000        399              
+I04  Monitor          1000 B  pcs        100       2000      10000              
+I05  Mouse             100 B  pcs        100        200        500              
+I06  Keyboard          100 B  pcs         50        200        800              
+I07  HDD               100 B  pcs        100        500       3000              
+I08  Fridge            100 C  pcs        100        500      15000              
+I09  TV Set           1000 C  pcs        500       5000      30000              
+I10  AC               1000 C  pcs        500       3000      40000              
+
+10 rows selected.
+
+SQL>  DESCRIBE ITEM_MASTER;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ITEM_NO                                   NOT NULL VARCHAR2(4)
+ NAME                                               VARCHAR2(10)
+ QTY_AVL                                            NUMBER(10)
+ CATEGORY                                           CHAR(2)
+ UNIT_MEASURE                                       CHAR(3)
+ RDR_LVL                                   NOT NULL NUMBER(4)
+ RDR_QTY                                   NOT NULL NUMBER(6)
+ RATE                                      NOT NULL NUMBER(6)
+
+SQL> INSERT INTO ITEM_MASTER(ITEM_NO,NAME,QTY_AVL,CATEGORY,UNIT_MEASURE,RDR_LVL,RDR_QTY,RATE)VALUES('I12','TABLE LAMP',1467,'C','pcs',124,235,1000);
+
+1 row created.
+
+SQL>  select *from ITEM_MASTER;
+
+ITEM NAME          QTY_AVL CA UNI    RDR_LVL    RDR_QTY       RATE              
+---- ---------- ---------- -- --- ---------- ---------- ----------              
+I01  MOBILE           5000 A  pcs        500       2000       8999              
+I02  HEADPHONE        1000 A  pcs        300       1000        999              
+I03  Charger           700 A  pcs        400       1000        399              
+I04  Monitor          1000 B  pcs        100       2000      10000              
+I05  Mouse             100 B  pcs        100        200        500              
+I06  Keyboard          100 B  pcs         50        200        800              
+I07  HDD               100 B  pcs        100        500       3000              
+I08  Fridge            100 C  pcs        100        500      15000              
+I09  TV Set           1000 C  pcs        500       5000      30000              
+I10  AC               1000 C  pcs        500       3000      40000              
+I12  TABLE LAMP       1467 C  pcs        124        235       1000
+I14  Speaker          1325 B  pcs        384        593       1599              
+
+12 rows selected.
+
+SQL> INSERT INTO ITEM_MASTER(ITEM_NO,NAME,QTY_AVL,CATEGORY,UNIT_MEASURE,RDR_LVL,RDR_QTY,RATE)VALUES('I14','Speaker',1325,'B','pcs',384,593,1599);
+
+1 row created.
+
+SQL> insert into ITEM_TRANS(IT_no,Trans_date,qty)values('I14','09-JUL-2020',4821);
+
+1 row created.
+
+SQL>  select *from ITEM_TRANS;
+
+IT_N TRANS_DAT        QTY                                                       
+---- --------- ----------                                                       
+I02  12-DEC-19       1098                                                       
+I02  07-APR-20       2499                                                       
+I04  24-MAY-21       3942                                                       
+I08  27-JAN-22       2344                                                       
+I14  09-JUL-20       4821                                                       
+
+SQL> spool off;

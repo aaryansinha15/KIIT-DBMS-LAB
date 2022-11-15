@@ -1,0 +1,283 @@
+SQL> create table EMPLOYEE_2(EMP_ID NUMBER(2),EMP_NAME VARCHAR2(10),DEPT VARCHAR2(10),GENDER VARCHAR2(6),AGE NUMBER(2),CITY VARCHAR2(10));
+
+Table created.
+
+SQL> DESC EMPLOYEE_2;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMP_ID                                             NUMBER(2)
+ EMP_NAME                                           VARCHAR2(10)
+ DEPT                                               VARCHAR2(10)
+ GENDER                                             VARCHAR2(6)
+ AGE                                                NUMBER(2)
+ CITY                                               VARCHAR2(10)
+
+SQL> INSERT INTO EMPLOYEE_2(EMP_ID,EMP_NAME,DEPT,GENDER,AGE,CITY)VALUES(1,'Kunal','CSE','Male',34,'BBSR');
+
+1 row created.
+
+SQL> select * from EMPLOYEE_2;
+
+    EMP_ID EMP_NAME   DEPT       GENDER        AGE CITY                         
+---------- ---------- ---------- ------ ---------- ----------                   
+         1 Kunal      CSE        Male           34 BBSR                         
+
+SQL> INSERT INTO EMPLOYEE_2(EMP_ID,EMP_NAME,DEPT,GENDER,AGE,CITY)VALUES(2,'Anand','CSE','Male',32,'BBSR');
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE_2(EMP_ID,EMP_NAME,DEPT,GENDER,AGE,CITY)VALUES(3,'Reema','IT','Female',27,'BBSR');
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE_2(EMP_ID,EMP_NAME,DEPT,GENDER,AGE,CITY)VALUES(4,'Swati','IT','Female',26,'Banglore');
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE_2(EMP_ID,EMP_NAME,DEPT,GENDER,AGE,CITY)VALUES(5,'Shiv','Bank','Male',30,'Rourkela');
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE_2(EMP_ID,EMP_NAME,DEPT,GENDER,AGE,CITY)VALUES(6,'Abhishek','HR','Male',29,'Delhi');
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE_2(EMP_ID,EMP_NAME,DEPT,GENDER,AGE,CITY)VALUES(7,'Rahul','CSCE','Male',25,'CTC');
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE_2(EMP_ID,EMP_NAME,DEPT,GENDER,AGE,CITY)VALUES(8,'Pragyan','CSSE','Female',30,'Puri');
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE_2(EMP_ID,EMP_NAME,DEPT,GENDER,AGE,CITY)VALUES(9,'Kaushal','IT','Male',32,'Kolkata',);
+INSERT INTO EMPLOYEE_2(EMP_ID,EMP_NAME,DEPT,GENDER,AGE,CITY)VALUES(9,'Kaushal','IT','Male',32,'Kolkata',)
+                                                                                                        *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> INSERT INTO EMPLOYEE_2(EMP_ID,EMP_NAME,DEPT,GENDER,AGE,CITY)VALUES(9,'Kaushal','IT','Male',32,'Kolkata');
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE_2(EMP_ID,EMP_NAME,DEPT,GENDER,AGE,CITY)VALUES(10,'Seenu','Accounts','Female',33,'Noida');
+
+1 row created.
+
+SQL> select* from EMPLOYEE_2;
+
+    EMP_ID EMP_NAME   DEPT       GENDER        AGE CITY                         
+---------- ---------- ---------- ------ ---------- ----------                   
+         1 Kunal      CSE        Male           34 BBSR                         
+         2 Anand      CSE        Male           32 BBSR                         
+         3 Reema      IT         Female         27 BBSR                         
+         4 Swati      IT         Female         26 Banglore                     
+         5 Shiv       Bank       Male           30 Rourkela                     
+         6 Abhishek   HR         Male           29 Delhi                        
+         7 Rahul      CSCE       Male           25 CTC                          
+         8 Pragyan    CSSE       Female         30 Puri                         
+         9 Kaushal    IT         Male           32 Kolkata                      
+        10 Seenu      Accounts   Female         33 Noida                        
+
+10 rows selected.
+
+SQL> select EMP_NAME,CITY from EMPLOYEE_2 where GENDER='Male AND CITY='Delhi';
+ERROR:
+ORA-01756: quoted string not properly terminated 
+
+
+SQL> select EMP_NAME,CITY from EMPLOYEE_2 where GENDER='Male' AND CITY='Delhi';
+
+EMP_NAME   CITY                                                                 
+---------- ----------                                                           
+Abhishek   Delhi                                                                
+
+SQL> select * from EMPLOYEE_2 where name like'A%';
+select * from EMPLOYEE_2 where name like'A%'
+                               *
+ERROR at line 1:
+ORA-00904: "NAME": invalid identifier 
+
+
+SQL> select * from EMPLOYEE_2 where EMP_NAME like'A%';
+
+    EMP_ID EMP_NAME   DEPT       GENDER        AGE CITY                         
+---------- ---------- ---------- ------ ---------- ----------                   
+         2 Anand      CSE        Male           32 BBSR                         
+         6 Abhishek   HR         Male           29 Delhi                        
+
+SQL> alter table EMPLOYEE_2 ADD(SALARY(number(6));
+alter table EMPLOYEE_2 ADD(SALARY(number(6))
+                                 *
+ERROR at line 1:
+ORA-00902: invalid datatype 
+
+
+SQL> alter table EMPLOYEE_2 ADD(SALARY number(6));
+
+Table altered.
+
+SQL> desc EMPLOYEE_2;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMP_ID                                             NUMBER(2)
+ EMP_NAME                                           VARCHAR2(10)
+ DEPT                                               VARCHAR2(10)
+ GENDER                                             VARCHAR2(6)
+ AGE                                                NUMBER(2)
+ CITY                                               VARCHAR2(10)
+ SALARY                                             NUMBER(6)
+
+SQL> select * from EMPLOYEE_2;
+
+    EMP_ID EMP_NAME   DEPT       GENDER        AGE CITY           SALARY        
+---------- ---------- ---------- ------ ---------- ---------- ----------        
+         1 Kunal      CSE        Male           34 BBSR                         
+         2 Anand      CSE        Male           32 BBSR                         
+         3 Reema      IT         Female         27 BBSR                         
+         4 Swati      IT         Female         26 Banglore                     
+         5 Shiv       Bank       Male           30 Rourkela                     
+         6 Abhishek   HR         Male           29 Delhi                        
+         7 Rahul      CSCE       Male           25 CTC                          
+         8 Pragyan    CSSE       Female         30 Puri                         
+         9 Kaushal    IT         Male           32 Kolkata                      
+        10 Seenu      Accounts   Female         33 Noida                        
+
+10 rows selected.
+
+SQL> update EMPLOYEE_2 set SALARY='40000' where EMP_ID=1;
+
+1 row updated.
+
+SQL> select * from EMPLOYEE_2;
+
+    EMP_ID EMP_NAME   DEPT       GENDER        AGE CITY           SALARY        
+---------- ---------- ---------- ------ ---------- ---------- ----------        
+         1 Kunal      CSE        Male           34 BBSR            40000        
+         2 Anand      CSE        Male           32 BBSR                         
+         3 Reema      IT         Female         27 BBSR                         
+         4 Swati      IT         Female         26 Banglore                     
+         5 Shiv       Bank       Male           30 Rourkela                     
+         6 Abhishek   HR         Male           29 Delhi                        
+         7 Rahul      CSCE       Male           25 CTC                          
+         8 Pragyan    CSSE       Female         30 Puri                         
+         9 Kaushal    IT         Male           32 Kolkata                      
+        10 Seenu      Accounts   Female         33 Noida                        
+
+10 rows selected.
+
+SQL> update EMPLOYEE_2 set SALARY='30000' where EMP_ID=2;
+
+1 row updated.
+
+SQL> update EMPLOYEE_2 set SALARY='50000' where EMP_ID=3;
+
+1 row updated.
+
+SQL> update EMPLOYEE_2 set SALARY='25000' where EMP_ID=4;
+
+1 row updated.
+
+SQL> update EMPLOYEE_2 set SALARY='30000' where EMP_ID=5;
+
+1 row updated.
+
+SQL> update EMPLOYEE_2 set SALARY='20000' where EMP_ID=6;
+
+1 row updated.
+
+SQL> update EMPLOYEE_2 set SALARY='45000' where EMP_ID=7;
+
+1 row updated.
+
+SQL> update EMPLOYEE_2 set SALARY='35000' where EMP_ID=8;
+
+1 row updated.
+
+SQL> update EMPLOYEE_2 set SALARY='55000' where EMP_ID=9;
+
+1 row updated.
+
+SQL> update EMPLOYEE_2 set SALARY='25000' where EMP_ID=10;
+
+1 row updated.
+
+SQL> select * from EMPLOYEE_2;
+
+    EMP_ID EMP_NAME   DEPT       GENDER        AGE CITY           SALARY        
+---------- ---------- ---------- ------ ---------- ---------- ----------        
+         1 Kunal      CSE        Male           34 BBSR            40000        
+         2 Anand      CSE        Male           32 BBSR            30000        
+         3 Reema      IT         Female         27 BBSR            50000        
+         4 Swati      IT         Female         26 Banglore        25000        
+         5 Shiv       Bank       Male           30 Rourkela        30000        
+         6 Abhishek   HR         Male           29 Delhi           20000        
+         7 Rahul      CSCE       Male           25 CTC             45000        
+         8 Pragyan    CSSE       Female         30 Puri            35000        
+         9 Kaushal    IT         Male           32 Kolkata         55000        
+        10 Seenu      Accounts   Female         33 Noida           25000        
+
+10 rows selected.
+
+SQL> select * from EMPLOYEE_2 where GENDER='Female' AND AGE>30 order by SALARY desc;
+
+    EMP_ID EMP_NAME   DEPT       GENDER        AGE CITY           SALARY        
+---------- ---------- ---------- ------ ---------- ---------- ----------        
+        10 Seenu      Accounts   Female         33 Noida           25000        
+
+SQL> select EMP_ID,EMP_NAME,DEPT from EMPLOYEE_2 where GENDER='Female' AND SALARY >=30000;
+
+    EMP_ID EMP_NAME   DEPT                                                      
+---------- ---------- ----------                                                
+         3 Reema      IT                                                        
+         8 Pragyan    CSSE                                                      
+
+SQL> select * from EMPLOYEE where GENDER='Male'=(select avg(AGE) from EMPLOYEE_2;
+select * from EMPLOYEE where GENDER='Male'=(select avg(AGE) from EMPLOYEE_2
+                                          *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> select  AVG(AGE) from EMPLOYEE_2 where GENDER='Male';
+
+
+  AVG(AGE)
+----------
+30.3333333
+
+SQL> select SUM(SALARY) from EMPLOYEE_2 where GENDER='Female' AND DEPT='CSE';
+
+SUM(SALARY)
+-----------
+
+SQL> select MAX(SALARY) from EMPLOYEE_2;
+
+MAX(SALARY)                                                                     
+-----------                                                                     
+      55000                                                                     
+
+SQL> select MIN(SALARY) from EMPLOYEE_2;
+
+MIN(SALARY)                                                                     
+-----------                                                                     
+      20000                                                                     
+
+SQL> select * from EMPLOYEE_2 where SALARY=(select MAX(SALARY) from EMPLOYEE_2);
+
+    EMP_ID EMP_NAME   DEPT       GENDER        AGE CITY           SALARY        
+---------- ---------- ---------- ------ ---------- ---------- ----------        
+         9 Kaushal    IT         Male           32 Kolkata         55000        
+
+SQL> select * from EMPLOYEE_2 where SALARY=(select MIN(SALARY) from EMPLOYEE_2);
+
+    EMP_ID EMP_NAME   DEPT       GENDER        AGE CITY           SALARY        
+---------- ---------- ---------- ------ ---------- ---------- ----------        
+         6 Abhishek   HR         Male           29 Delhi           20000        
+
+SQL> commit;
+
+Commit complete.
+
+SQL> spool off;
